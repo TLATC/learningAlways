@@ -16,6 +16,10 @@ import java.io.Serializable;
  * 修改记录: 修改日期 修改人员 修改说明
  */
 public class BaseBean implements Serializable {
+
+    /**
+     * 序列化。用以分布式调用或其他情况的网络数据传输
+     */
     private static final long serialVersionUID = 8237913239742557480L;
 
     /**
