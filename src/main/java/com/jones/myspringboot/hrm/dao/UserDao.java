@@ -5,7 +5,7 @@ import com.jones.myspringboot.hrm.model.User;
 import java.util.List;
 
 /**
- * 系统名称: WereWolf
+ * 系统名称: mySpringBoot
  * 模块名称:
  * 类 名 称: UserDao
  * 软件版权: Jones

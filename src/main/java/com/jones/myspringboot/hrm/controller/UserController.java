@@ -7,11 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
- * 系统名称: WereWolf
+ * 系统名称: mySpringBoot
  * 模块名称: 用户管理
  * 类 名 称: UserController
  * 软件版权: Jones
@@ -23,17 +24,12 @@ import java.util.List;
  * 相关文档:
  * 修改记录: 修改日期 修改人员 修改说明
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
-
-    @RequestMapping("/test")
-    String home() {
-        return "Hello World!";
-    }
 
     /**
      * 获取满足条件的用户列表

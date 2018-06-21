@@ -3,7 +3,7 @@ package com.jones.myspringboot.base.model;
 import java.io.Serializable;
 
 /**
- * 系统名称: WereWolf
+ * 系统名称: mySpringBoot
  * 模块名称:
  * 类 名 称: BaseBean
  * 软件版权: Jones

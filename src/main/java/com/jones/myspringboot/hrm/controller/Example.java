@@ -1,12 +1,10 @@
 package com.jones.myspringboot.hrm.controller;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 系统名称: WereWolf
+ * 系统名称: mySpringBoot
  * 模块名称:
  * 类 名 称: Example
  * 软件版权: Jones
@@ -19,15 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
  * 修改记录: 修改日期 修改人员 修改说明
  */
 @RestController
-@EnableAutoConfiguration
 public class Example {
 
-    @RequestMapping("/test")
-    String home() {
+    @RequestMapping("/hello")
+    public String home() {
         return "Hello World!";
-    }
-
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(Example.class, args);
     }
 }

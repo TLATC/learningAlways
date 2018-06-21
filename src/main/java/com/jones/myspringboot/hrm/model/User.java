@@ -3,7 +3,7 @@ package com.jones.myspringboot.hrm.model;
 import com.jones.myspringboot.base.model.BaseBean;
 
 /**
- * 系统名称: WereWolf
+ * 系统名称: mySpringBoot
  * 模块名称:
  * 类 名 称: User
  * 软件版权: Jones

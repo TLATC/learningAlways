@@ -1,7 +1,7 @@
 package com.jones.myspringboot.base.constant;
 
 /**
- * 系统名称: WereWolf
+ * 系统名称: mySpringBoot
  * 模块名称: redis订阅频道枚举类
  * 类 名 称: RedisChannelEnum
  * 软件版权: Jones

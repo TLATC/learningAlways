@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 系统名称: WereWolf
+ * 系统名称: mySpringBoot
  * 模块名称:
  * 类 名 称: UserServiceImpl
  * 软件版权: Jones
@@ -25,8 +25,8 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService{
 
-    @Autowired
-    private UserDao userDao;
+//    @Autowired
+//    private UserDao userDao;
 
     /**
      * 增加用户
