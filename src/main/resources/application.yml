@@ -1,9 +1,13 @@
+########################
+# 通用内容配置
+########################
 server:
-  port: 5080
   tomcat:
     uri-encoding: utf-8
 
 spring:
+    profiles:
+      active: dev #若为测试环境，则换为test
     redis:
         host: 10.0.10.238
         port: 6379

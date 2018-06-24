@@ -1,0 +1,13 @@
+########################
+# 开发环境配置
+########################
+server:
+  port: 5080
+
+#自定义属性
+com:
+  jones:
+    myspringboot:
+      text: 配置文件中生成的随机数是：
+      number: ${random.int(20)} #20以内的随即数
+      desc: ${com.jones.myspringboot.text} ${com.jones.myspringboot.number} #参数间的引用
