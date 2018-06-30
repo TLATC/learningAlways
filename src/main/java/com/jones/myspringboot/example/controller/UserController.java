@@ -19,11 +19,11 @@ import java.util.*;
  * 修改记录: 修改日期 修改人员 修改说明
  */
 
-@RestController
+@RestController("testUserController")
 @RequestMapping(value = "/users")
 public class UserController {
 
-    // 创建线程安全的Map todo
+    // 创建线程安全的Map
     static Map<Long,User> userMap = Collections.synchronizedMap(new HashMap<Long, User>());
 
     /**
@@ -61,15 +61,27 @@ public class UserController {
     }
 
     /**
-     *
+     * 处理"/users/{id}"的PUT请求，用来更新User信息
      * @param id
      * @return
      */
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public String putUser(@PathVariable Long id){
         User user = userMap.get(id);
         user.setName("新名字");
         user.setAge(10);
         userMap.put(id,user);
+        return "SUCCESS";
+    }
+
+    /**
+     * 处理"/users/{id}"的DELETE请求，用来删除User
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public String deleteUser(@PathVariable Long id){
+        userMap.remove(id);
         return "SUCCESS";
     }
 
