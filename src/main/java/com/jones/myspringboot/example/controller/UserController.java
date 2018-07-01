@@ -1,6 +1,9 @@
 package com.jones.myspringboot.example.controller;
 
 import com.jones.myspringboot.example.model.User;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -31,6 +34,7 @@ public class UserController {
      * 还可以通过@RequestParam从页面中传递参数来进行查询条件或者翻页信息的传递
      * @return
      */
+    @ApiOperation(value = "获取用户列表", notes = "") //给API增加说明
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public List<User> getUserList(){
         List<User> userList = new ArrayList<User>(userMap.values());
@@ -43,6 +47,8 @@ public class UserController {
      * @param user
      * @return
      */
+    @ApiOperation(value="创建用户", notes="根据User对象创建用户")
+    @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User") //给参数增加说明
     @RequestMapping(value = "/", method = RequestMethod.POST)
     public String postUser(@ModelAttribute User user){
         userMap.put(user.getId(),user);
@@ -55,6 +61,8 @@ public class UserController {
      * @param id
      * @return
      */
+    @ApiOperation(value="获取用户详细信息", notes="根据url的id来获取用户详细信息")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public User getUser(@PathVariable Long id){
         return userMap.get(id);
@@ -65,12 +73,17 @@ public class UserController {
      * @param id
      * @return
      */
+    @ApiOperation(value="更新用户详细信息", notes="根据url的id来指定更新对象，并根据传过来的user信息来更新用户详细信息")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long"),
+            @ApiImplicitParam(name = "user", value = "用户详细实体user", required = true, dataType = "User")
+    })
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public String putUser(@PathVariable Long id){
-        User user = userMap.get(id);
-        user.setName("新名字");
-        user.setAge(10);
-        userMap.put(id,user);
+    public String putUser(@PathVariable Long id, @RequestBody User user){
+        User u = userMap.get(id);
+        u.setName(user.getName());
+        u.setAge(user.getAge());
+        userMap.put(id,u);
         return "SUCCESS";
     }
 
@@ -79,6 +92,8 @@ public class UserController {
      * @param id
      * @return
      */
+    @ApiOperation(value="删除用户", notes="根据url的id来指定删除对象")
+    @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public String deleteUser(@PathVariable Long id){
         userMap.remove(id);
