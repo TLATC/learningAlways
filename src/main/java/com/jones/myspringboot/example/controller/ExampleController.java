@@ -1,6 +1,9 @@
 package com.jones.myspringboot.example.controller;
 
+import com.jones.myspringboot.base.controller.BaseController;
+import com.jones.myspringboot.base.model.JsonResult;
 import com.jones.myspringboot.example.model.YmlProperties;
+import com.jones.myspringboot.example.system.MyException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 修改记录: 修改日期 修改人员 修改说明
  */
 @RestController
-public class Example {
+public class ExampleController extends BaseController{
 
     @Autowired
     private YmlProperties ymlProperties; //要取属性值的对象必须注入到spring中，否则也取不到值
@@ -39,4 +42,18 @@ public class Example {
         sb.append("dev配置中的端口是：" + ymlProperties.getPort());
         return sb.toString();
     }
+
+    @RequestMapping("/exceptionTest")
+    public String exceptionTest() throws MyException{
+        throw new MyException("抛出一个异常");
+    }
+
+    @RequestMapping("/renderTest")
+    public JsonResult renderTest(int flag){
+        if(0==flag){
+           return renderError("返回错误");
+        }
+        return renderSuccess("返回成功");
+    }
+
 }

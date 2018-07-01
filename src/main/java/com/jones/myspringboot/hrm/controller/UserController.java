@@ -1,5 +1,7 @@
 package com.jones.myspringboot.hrm.controller;
 
+import com.jones.myspringboot.base.controller.BaseController;
+import com.jones.myspringboot.base.model.JsonResult;
 import com.jones.myspringboot.hrm.model.User;
 import com.jones.myspringboot.hrm.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends BaseController{
 
     @Autowired
     private UserService userService;
@@ -38,8 +40,8 @@ public class UserController {
      */
     @RequestMapping(value = "/getUserList", method = RequestMethod.POST)
     @ResponseBody
-    public List<User> getUserList(User user){
+    public JsonResult getUserList(User user){
         List<User> userList = userService.selectUser(user);
-        return userList;
+        return renderSuccess(userList);
     }
 }
