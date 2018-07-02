@@ -1,6 +1,7 @@
 package com.jones.myspringboot.example.controller;
 
 import com.jones.myspringboot.base.controller.BaseController;
+import com.jones.myspringboot.base.exception.CommonException;
 import com.jones.myspringboot.base.model.JsonResult;
 import com.jones.myspringboot.example.model.YmlProperties;
 import com.jones.myspringboot.example.system.MyException;
@@ -44,8 +45,12 @@ public class ExampleController extends BaseController{
     }
 
     @RequestMapping("/exceptionTest")
-    public String exceptionTest() throws MyException{
-        throw new MyException("抛出一个异常");
+    public String exceptionTest(){
+        int[] a = new int[10];
+        int qqq = a[12];
+        System.out.println("这里越界了" + qqq);
+        return "sdfa";
+//        throw new CommonException("抛出一个异常");
     }
 
     @RequestMapping("/renderTest")
