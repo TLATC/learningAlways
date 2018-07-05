@@ -3,3 +3,8 @@
 ########################
 server:
   port: 1111
+
+#日志配置
+logging:
+  level: info
+  #file: my.log #生成日志到指定文件

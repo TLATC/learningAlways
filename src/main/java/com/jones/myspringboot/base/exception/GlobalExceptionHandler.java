@@ -1,7 +1,8 @@
 package com.jones.myspringboot.base.exception;
 
 import com.jones.myspringboot.base.model.JsonResult;
-import com.jones.myspringboot.example.system.MyException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.NestedRuntimeException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -25,6 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     /**
      * 统一异常处理
      * @param req
@@ -35,7 +38,11 @@ public class GlobalExceptionHandler {
     @ResponseBody
     public JsonResult CommonExceptionHandler(HttpServletRequest req, Exception e){
 
-        //todo: 还应该加后台日志打印。否则拦截后，后台日志不会打印
+        //此处要加后台日志打印。否则拦截后，后台日志不会打印
+        LOGGER.error("处理普通请求异常时响应到客户端异常",e);
+        LOGGER.debug("这是debug级别日志"); //todo:日志级别修改并未生效
+        LOGGER.info("这是info级别的日志");
+
         String errorMsg = e.getMessage();
         if(e instanceof CommonException){
             errorMsg = errorMsg;

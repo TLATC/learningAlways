@@ -11,3 +11,9 @@ com:
       text: 配置文件中生成的随机数是：
       number: ${random.int(20)} #20以内的随即数
       desc: ${com.jones.myspringboot.text} ${com.jones.myspringboot.number} #参数间的引用
+
+#日志配置
+logging:
+  level: debug
+
+
