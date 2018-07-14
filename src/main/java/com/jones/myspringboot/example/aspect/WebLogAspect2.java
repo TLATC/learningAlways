@@ -1,6 +1,5 @@
 package com.jones.myspringboot.example.aspect;
 
-import com.jones.myspringboot.base.exception.GlobalExceptionHandler;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -25,11 +24,11 @@ import org.springframework.stereotype.Component;
  * 修改记录: 修改日期 修改人员 修改说明
  */
 @Aspect //将一个java类定义为切面类
-@Order(5) //优先级为5
+@Order(10) //优先级为10
 @Component
-public class WebLogAspect {
+public class WebLogAspect2 {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect2.class);
 
     ThreadLocal<Long> startTime = new ThreadLocal<>(); //本地线程变量，记录开始时间（防止同步问题）
 
@@ -47,7 +46,7 @@ public class WebLogAspect {
     @Before("webLog()")
     public void doBefore(JoinPoint joinPoint) throws Throwable{
         startTime.set(System.currentTimeMillis());
-        LOGGER.debug("用切面在方法执行前的打印，本切面类优先级为5"); //在切入点前的操作，按order的值由小到大执行
+        LOGGER.debug("用切面在方法执行前的打印，本切面类优先级为10");
     }
 
     /**
@@ -59,7 +58,7 @@ public class WebLogAspect {
     public void doAfterReturning(Object ret) throws Throwable{
         LOGGER.debug("用切面在方法执行后的打印，方法返回值是：" + ret);
         LOGGER.debug("本方法的耗时是：" + (System.currentTimeMillis()-startTime.get()));
-        LOGGER.debug("本切面类优先级为5"); //在切入点后的操作，按order的值由大到小执行
+        LOGGER.debug("本切面类优先级为10");
     }
 
 }
