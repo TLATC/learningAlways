@@ -5,9 +5,13 @@ import com.jones.myspringboot.base.exception.CommonException;
 import com.jones.myspringboot.base.model.JsonResult;
 import com.jones.myspringboot.example.model.YmlProperties;
 import com.jones.myspringboot.example.system.MyException;
+import com.jones.myspringboot.example.task.AsyncTasks;
+import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.Future;
 
 /**
  * 系统名称: mySpringBoot
@@ -27,6 +31,8 @@ public class ExampleController extends BaseController{
 
     @Autowired
     private YmlProperties ymlProperties; //要取属性值的对象必须注入到spring中，否则也取不到值
+    @Autowired
+    private AsyncTasks asyncTasks; //异步任务
 
     @RequestMapping("/hello")
     public String hello() {
@@ -59,6 +65,31 @@ public class ExampleController extends BaseController{
            return renderError("返回错误");
         }
         return renderSuccess("返回成功");
+    }
+
+    @RequestMapping("/asyncTest")
+    public void asyncTest(){
+
+        long startTime = System.currentTimeMillis();
+
+        asyncTasks.doTaskOne(); //执行任务一
+        Future<String> task2 = asyncTasks.doTaskTwo(); //执行任务二
+        Future<String> task3 = asyncTasks.doTaskThree(); //执行任务三
+
+        //等待任务二和任务三完成
+        while(true){
+            if(task2.isDone() && task3.isDone()){
+                break;
+            }
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        long endTime = System.currentTimeMillis();
+        System.out.println("任务二和任务三都完成了，耗时：" + (endTime - startTime) + "毫秒");
     }
 
 }
