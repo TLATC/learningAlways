@@ -80,4 +80,52 @@ public class AsyncTasks {
         LOGGER.debug("任务三完成，耗时：" + (endTime - startTime) + "毫秒");
         return new AsyncResult<>("任务三完成");
     }
+
+    /**
+     * 用线程池执行异步任务一
+     */
+    @Async("taskExecutor")
+    public void doTaskExecutorOne(){
+        LOGGER.debug("开始用线程池做任务一");
+        long startTime = System.currentTimeMillis();
+        try {
+            Thread.sleep(random.nextInt(10000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        long endTime = System.currentTimeMillis();
+        LOGGER.debug("线程池任务一完成，耗时：" + (endTime - startTime) + "毫秒");
+    }
+
+    /**
+     * 用线程池执行异步任务二
+     */
+    @Async("taskExecutor")
+    public void doTaskExecutorTwo(){
+        LOGGER.debug("开始用线程池做任务二");
+        long startTime = System.currentTimeMillis();
+        try {
+            Thread.sleep(random.nextInt(10000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        long endTime = System.currentTimeMillis();
+        LOGGER.debug("线程池任务二完成，耗时：" + (endTime - startTime) + "毫秒");
+    }
+
+    /**
+     * 用线程池执行异步任务三
+     */
+    @Async("taskExecutor")
+    public void doTaskExecutorThree(){
+        LOGGER.debug("开始用线程池做任务三");
+        long startTime = System.currentTimeMillis();
+        try {
+            Thread.sleep(random.nextInt(10000));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        long endTime = System.currentTimeMillis();
+        LOGGER.debug("线程池任务三完成，耗时：" + (endTime - startTime) + "毫秒");
+    }
 }

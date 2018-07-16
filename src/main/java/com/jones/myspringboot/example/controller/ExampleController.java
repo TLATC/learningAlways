@@ -92,4 +92,12 @@ public class ExampleController extends BaseController{
         System.out.println("任务二和任务三都完成了，耗时：" + (endTime - startTime) + "毫秒");
     }
 
+    @RequestMapping("/asyncExecutorTest")
+    public void asyncExecutorTest() throws Exception{
+        asyncTasks.doTaskExecutorOne(); //执行任务一
+        asyncTasks.doTaskExecutorTwo(); //执行任务二
+        asyncTasks.doTaskExecutorThree(); //执行任务三
+        Thread.currentThread().join();
+    }
+
 }
