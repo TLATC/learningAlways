@@ -36,9 +36,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public JsonResult CommonExceptionHandler(HttpServletRequest req, Exception e){
+    public JsonResult commonExceptionHandler(HttpServletRequest req, Exception e){
 
-        //此处要加后台日志打印。否则拦截后，后台日志不会打印
+        // 此处要加后台日志打印。否则拦截后，后台日志不会打印
         LOGGER.error("处理普通请求异常时响应到客户端异常",e);
 
         String errorMsg = e.getMessage();

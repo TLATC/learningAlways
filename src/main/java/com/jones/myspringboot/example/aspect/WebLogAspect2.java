@@ -23,14 +23,19 @@ import org.springframework.stereotype.Component;
  * 相关文档:
  * 修改记录: 修改日期 修改人员 修改说明
  */
-@Aspect //将一个java类定义为切面类
-@Order(10) //优先级为10
+// 将一个java类定义为切面类
+@Aspect
+// 优先级为10
+@Order(10)
 @Component
 public class WebLogAspect2 {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect2.class);
 
-    ThreadLocal<Long> startTime = new ThreadLocal<>(); //本地线程变量，记录开始时间（防止同步问题）
+    /**
+     * 本地线程变量，记录开始时间（防止同步问题）
+     */
+    ThreadLocal<Long> startTime = new ThreadLocal<>();
 
     /**
      * 指定切点

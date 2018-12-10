@@ -29,10 +29,16 @@ import java.util.concurrent.Future;
 @RestController
 public class ExampleController extends BaseController{
 
+    /**
+     * 要取属性值的对象必须注入到spring中，否则也取不到值
+     */
     @Autowired
-    private YmlProperties ymlProperties; //要取属性值的对象必须注入到spring中，否则也取不到值
+    private YmlProperties ymlProperties;
+    /**
+     *  异步任务
+     */
     @Autowired
-    private AsyncTasks asyncTasks; //异步任务
+    private AsyncTasks asyncTasks;
 
     @RequestMapping("/hello")
     public String hello() {
@@ -72,11 +78,14 @@ public class ExampleController extends BaseController{
 
         long startTime = System.currentTimeMillis();
 
-        asyncTasks.doTaskOne(); //执行任务一
-        Future<String> task2 = asyncTasks.doTaskTwo(); //执行任务二
-        Future<String> task3 = asyncTasks.doTaskThree(); //执行任务三
+        // 执行任务一
+        asyncTasks.doTaskOne();
+        // 执行任务二
+        Future<String> task2 = asyncTasks.doTaskTwo();
+        // 执行任务三
+        Future<String> task3 = asyncTasks.doTaskThree();
 
-        //等待任务二和任务三完成
+        // 等待任务二和任务三完成
         while(true){
             if(task2.isDone() && task3.isDone()){
                 break;

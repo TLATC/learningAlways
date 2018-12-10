@@ -23,8 +23,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 相关文档:
  * 修改记录: 修改日期 修改人员 修改说明
  */
-@Configuration //通过@Configuration注解，让Spring来加载该类配置
-@EnableSwagger2 //通过@EnableSwagger2注解来启用Swagger2
+// 通过@Configuration注解，让Spring来加载该类配置
+@Configuration
+// 通过@EnableSwagger2注解来启用Swagger2
+@EnableSwagger2
 public class Swagger2 {
 
     /**
@@ -36,7 +38,8 @@ public class Swagger2 {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.jones.myspringboot.example")) //控制哪些接口暴露给Swagger来展现，本例采用指定扫描的包路径来定义，Swagger会扫描该包下所有Controller定义的API，并产生文档内容（除了被@ApiIgnore指定的请求）
+                // 控制哪些接口暴露给Swagger来展现，本例采用指定扫描的包路径来定义，Swagger会扫描该包下所有Controller定义的API，并产生文档内容（除了被@ApiIgnore指定的请求）
+                .apis(RequestHandlerSelectors.basePackage("com.jones.myspringboot.example"))
                 .paths(PathSelectors.any())
                 .build();
     }
@@ -47,11 +50,16 @@ public class Swagger2 {
      */
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("Spring Boot中使用Swagger2构建RESTful APIs") //api文档标题
-                .description("更多Spring Boot相关文章请关注：http://blog.didispace.com/") //api文档描述
-                .termsOfServiceUrl("http://blog.didispace.com/") //相关链接
-                .contact("Jones") //api文档创建人
-                .version("1.0.1") //api版本
+                // api文档标题
+                .title("Spring Boot中使用Swagger2构建RESTful APIs")
+                // api文档描述
+                .description("更多Spring Boot相关文章请关注：http://blog.didispace.com/")
+                // 相关链接
+                .termsOfServiceUrl("http://blog.didispace.com/")
+                // api文档创建人
+                .contact("Jones")
+                // api版本
+                .version("1.0.1")
                 .build();
     }
 }

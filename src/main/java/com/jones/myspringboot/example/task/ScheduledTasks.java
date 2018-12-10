@@ -22,13 +22,13 @@ import java.util.Date;
 @Component
 public class ScheduledTasks {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+    private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("HH:mm:ss");
 
     /**
      * 每隔5秒执行一次
      */
 //    @Scheduled(fixedRate = 5000)
 //    public void reportCurrentTime(){
-//        System.out.println("当前时间是：" + dateFormat.format(new Date()));
+//        System.out.println("当前时间是：" + DATE_FORMAT.format(new Date()));
 //    }
 }

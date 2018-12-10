@@ -37,8 +37,9 @@ public class YmlProperties {
     private String desc;
     /**
      * dev配置文件中的server.port
+     * 静态属性取值方式不同，需用set方法
      */
-    private static String port; //静态属性取值方式不同，需用set方法
+    private static String port;
 
     public String getActive() {
         return active;

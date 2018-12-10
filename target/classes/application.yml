@@ -8,6 +8,9 @@ server:
 spring:
     profiles:
       active: dev #若为测试环境，则换为test
+    output:
+      ansi:
+        enabled: detect #检查终端是否支持ANSI，是的话就采用彩色输出 todo:改变配置并未生效
     redis:
         host: 10.0.10.238
         port: 6379

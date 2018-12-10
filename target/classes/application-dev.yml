@@ -11,3 +11,15 @@ com:
       text: 配置文件中生成的随机数是：
       number: ${random.int(20)} #20以内的随即数
       desc: ${com.jones.myspringboot.text} ${com.jones.myspringboot.number} #参数间的引用
+
+spring:
+    output:
+      ansi:
+        enabled: detect #检查终端是否支持ANSI，是的话就采用彩色输出 todo:改变配置并未生效
+
+#日志配置
+logging:
+  level:
+   com.jones.myspringboot: debug
+
+

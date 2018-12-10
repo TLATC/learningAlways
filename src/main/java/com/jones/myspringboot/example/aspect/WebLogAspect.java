@@ -31,7 +31,10 @@ public class WebLogAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WebLogAspect.class);
 
-    ThreadLocal<Long> startTime = new ThreadLocal<>(); //本地线程变量，记录开始时间（防止同步问题）
+    /**
+     * 本地线程变量，记录开始时间（防止同步问题）
+     */
+    ThreadLocal<Long> startTime = new ThreadLocal<>();
 
     /**
      * 指定切点
@@ -47,7 +50,8 @@ public class WebLogAspect {
     @Before("webLog()")
     public void doBefore(JoinPoint joinPoint) throws Throwable{
         startTime.set(System.currentTimeMillis());
-        LOGGER.debug("用切面在方法执行前的打印，本切面类优先级为5"); //在切入点前的操作，按order的值由小到大执行
+        // 在切入点前的操作，按order的值由小到大执行
+        LOGGER.debug("用切面在方法执行前的打印，本切面类优先级为5");
     }
 
     /**
@@ -59,7 +63,8 @@ public class WebLogAspect {
     public void doAfterReturning(Object ret) throws Throwable{
         LOGGER.debug("用切面在方法执行后的打印，方法返回值是：" + ret);
         LOGGER.debug("本方法的耗时是：" + (System.currentTimeMillis()-startTime.get()));
-        LOGGER.debug("本切面类优先级为5"); //在切入点后的操作，按order的值由大到小执行
+        // 在切入点后的操作，按order的值由大到小执行
+        LOGGER.debug("本切面类优先级为5");
     }
 
 }
