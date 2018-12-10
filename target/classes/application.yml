@@ -1,0 +1,20 @@
+########################
+# 通用内容配置
+########################
+server:
+  tomcat:
+    uri-encoding: utf-8
+
+spring:
+    profiles:
+      active: dev #若为测试环境，则换为test
+    redis:
+        host: 10.0.10.238
+        port: 6379
+        password: 123456
+        pool:
+          max-active: 8
+          max-wait: 1
+          max-idle: 8
+          min-idle: 0
+        timeout: 0
