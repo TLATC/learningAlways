@@ -7,10 +7,10 @@ server:
 #自定义属性
 com:
   jones:
-    myspringboot:
+    LearningAlways:
       text: 配置文件中生成的随机数是：
       number: ${random.int(20)} #20以内的随即数
-      desc: ${com.jones.myspringboot.text} ${com.jones.myspringboot.number} #参数间的引用
+      desc: ${com.jones.LearningAlways.text} ${com.jones.LearningAlways.number} #参数间的引用
 
 spring:
     output:
@@ -20,6 +20,6 @@ spring:
 #日志配置
 logging:
   level:
-   com.jones.myspringboot: debug
+   com.jones.LearningAlways: debug
 
 
