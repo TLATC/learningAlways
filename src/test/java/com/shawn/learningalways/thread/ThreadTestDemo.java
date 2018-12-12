@@ -1,5 +1,8 @@
 package com.shawn.learningalways.thread;
 
+import com.shawn.learningalways.thread.lock.leftrightdeadlock.Lock;
+import com.shawn.learningalways.thread.lock.leftrightdeadlock.LrThreadTask;
+
 /**
  * @ClassName: ThreadTestDemo
  * @Description 线程测试类
@@ -26,7 +29,7 @@ public class ThreadTestDemo {
      * 加入了同步锁，不会出现剩余票数为负数的情况
      */
     private static void synchronizedTicketTest(){
-        // 创建synchronizedTicketTest的Runnable对象
+        // 创建synchronizedTicket的Runnable对象
         SynchronizedTicket synchronizedTicket = new SynchronizedTicket();
 
         // 创建线程对象的模拟三个售票窗口
@@ -35,10 +38,29 @@ public class ThreadTestDemo {
         new Thread(synchronizedTicket, "窗口3").start();
     }
 
+    /**
+     * 测试锁顺序死锁
+     */
+    private static void leftRightDeadLockTest(){
+        // 创建LrThreadTask的Runnable对象
+        LrThreadTask threadTask = new LrThreadTask();
+
+        // 创建两个线程对象，模拟A、B两个用户
+        Thread threadA = new Thread(threadTask);
+        Thread threadB = new Thread(threadTask);
+        threadA.start();
+        threadB.start();
+    }
+
     public static void main(String[] args) {
+
         /// 测试非线程安全买票
 //        UnSafeTicketTest();
-        // 测试加入同步锁后，进行卖票
-        synchronizedTicketTest();
+
+        /// 测试加入同步锁后，进行卖票
+//        synchronizedTicketTest();
+
+        /// 测试锁顺序死锁
+        leftRightDeadLockTest();
     }
 }
