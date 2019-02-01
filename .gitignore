@@ -27,3 +27,5 @@ hs_err_pid*
 /learningAlways/*.iml
 /sprngmvcdemo/target
 /sprngmvcdemo/*.iml
+/springMvcDemo/target
+/springMvcDemo/*.iml
