@@ -8,10 +8,10 @@ import java.text.SimpleDateFormat;
  * 系统名称: learningAlways
  * 模块名称: 测试模块
  * 类 名 称: ScheduledTasks
- * 软件版权: Jones
+ * 软件版权: shawn
  * 功能说明：定时任务类
  * 系统版本：v1.0.1
- * 开发人员: Jones
+ * 开发人员: shawn
  * 开发时间: 2018/7/14 16:05
  * 审核人员:
  * 相关文档:

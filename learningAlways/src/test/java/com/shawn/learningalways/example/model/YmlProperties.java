@@ -7,10 +7,10 @@ import org.springframework.stereotype.Component;
  * 系统名称: learningAlways
  * 模块名称: 测试模块
  * 类 名 称: YmlProperties
- * 软件版权: Jones
+ * 软件版权: shawn
  * 功能说明：测试读取配置文件
  * 系统版本：v1.0.1
- * 开发人员: Jones
+ * 开发人员: shawn
  * 开发时间: 2018/6/24 15:57
  * 审核人员:
  * 相关文档:
@@ -33,7 +33,7 @@ public class YmlProperties {
     /**
      * dev配置文件中的desc
      */
-    @Value("${com.jones.learningalways.desc}")
+    @Value("${com.shawn.learningalways.desc}")
     private String desc;
     /**
      * dev配置文件中的server.port

@@ -1,4 +1,4 @@
-//package com.jones.LearningAlways;
+//package com.shawn.LearningAlways;
 //
 //import org.springframework.boot.builder.SpringApplicationBuilder;
 //import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;

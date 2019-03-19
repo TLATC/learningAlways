@@ -6,11 +6,11 @@ server:
 
 #自定义属性
 com:
-  jones:
+  shawn:
     LearningAlways:
       text: 配置文件中生成的随机数是：
       number: ${random.int(20)} #20以内的随即数
-      desc: ${com.jones.LearningAlways.text} ${com.jones.LearningAlways.number} #参数间的引用
+      desc: ${com.shawn.LearningAlways.text} ${com.shawn.LearningAlways.number} #参数间的引用
 
 spring:
     output:
@@ -20,6 +20,6 @@ spring:
 #日志配置
 logging:
   level:
-   com.jones.LearningAlways: debug
+   com.shawn.LearningAlways: debug
 
 

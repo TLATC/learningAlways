@@ -6,10 +6,10 @@ import com.shawn.learningalways.base.model.JsonResult;
  * 系统名称: learningAlways
  * 模块名称:
  * 类 名 称: BaseController
- * 软件版权: Jones
+ * 软件版权: shawn
  * 功能说明：基础控制器
  * 系统版本：v1.0.1
- * 开发人员: Jones
+ * 开发人员: shawn
  * 开发时间: 2018/7/1 15:48
  * 审核人员:
  * 相关文档:

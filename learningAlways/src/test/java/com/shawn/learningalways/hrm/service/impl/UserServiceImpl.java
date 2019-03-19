@@ -11,10 +11,10 @@ import java.util.List;
  * 系统名称: learningAlways
  * 模块名称:
  * 类 名 称: UserServiceImpl
- * 软件版权: Jones
+ * 软件版权: shawn
  * 功能说明：用户管理Service实现层
  * 系统版本：v1.0.1
- * 开发人员: Jones
+ * 开发人员: shawn
  * 开发时间: 2018/5/20 13:39
  * 审核人员:
  * 相关文档:
