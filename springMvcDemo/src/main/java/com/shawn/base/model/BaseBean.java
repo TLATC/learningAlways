@@ -17,10 +17,6 @@ public class BaseBean implements Serializable {
     private static final long serialVersionUID = 8237913239742557480L;
 
     /**
-     * 主键ID
-     */
-    private String id;
-    /**
      * 创建人
      */
     private String creater;
@@ -40,14 +36,6 @@ public class BaseBean implements Serializable {
      * 软删标识（0表示未删除，1表示已删除）
      */
     private String delTag;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getCreater() {
         return creater;
