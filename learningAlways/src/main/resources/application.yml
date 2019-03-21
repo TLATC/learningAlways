@@ -7,7 +7,8 @@ server:
 
 spring:
     profiles:
-      active: dev #若为测试环境，则换为test
+      # 开发环境为dev，测试环境为test
+      active: dev
     output:
       ansi:
         enabled: detect #检查终端是否支持ANSI，是的话就采用彩色输出 todo:改变配置并未生效
@@ -41,3 +42,8 @@ spring:
 #      nodes: 10.0.12.33:26379,10.0.12.34:26379
 #    # 主从节点均为此密码，对应redis配置文件中的masterauth
 #    password: 123456
+
+context:
+    # 监听器
+    listener:
+        classes: com.shawn.learningalways.base.listener.ApplicationEventListener
