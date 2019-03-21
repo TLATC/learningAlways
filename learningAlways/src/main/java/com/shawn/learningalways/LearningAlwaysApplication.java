@@ -4,6 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -29,12 +33,40 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  *　　　　　　　　 ┗┓┓┏━┳┓┏┛ + + + +
  *　　　　　　　　  ┃┫┫ ┃┫┫
  *　　　　　　　　  ┗┻┛ ┗┻┛+ + + +
+ *
+ *
+ *
+ * @ClassName: HsipccwebApplication
+ * @Description springboot入口类
+ * @author: Shawn Wu
+ * @date: 2019/3/21 22:18
+ * @version:
  */
 @SpringBootApplication
 @EnableScheduling //开启定时任务
 @EnableAsync //开启异步任务
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class LearningAlwaysApplication {
+
+	/**
+	 * @Description 设置redisTemplate的序列化策略：
+	 *              key值使用String序列化方式，value还是采用默认的JDK序列化
+	 * @param redisConnectionFactory
+	 * @return
+	 * @date 2019/3/21 22:21
+	 * @auther Shawn Wu
+	 */
+	@Bean
+	public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+		// 创建redisTemplate模板
+		RedisTemplate<Object, Object> redisTemplate = new RedisTemplate<>();
+		// 关联redisConnectionFactory
+		redisTemplate.setConnectionFactory(redisConnectionFactory);
+		// key值使用String序列化方式，value还是采用默认的JDK序列化
+		redisTemplate.setKeySerializer(new StringRedisSerializer());
+		redisTemplate.afterPropertiesSet();
+		return redisTemplate;
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(LearningAlwaysApplication.class, args);

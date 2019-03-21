@@ -4,7 +4,9 @@ import com.shawn.learningalways.base.controller.BaseController;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.example.model.YmlProperties;
 import com.shawn.learningalways.example.task.AsyncTasks;
+import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,10 +38,37 @@ public class ExampleController extends BaseController{
      */
     @Autowired
     private AsyncTasks asyncTasks;
+    @Autowired
+    RedisTemplate redisTemplate;
 
+
+    /**
+     * @Description 每个工程都应该有个Hello World
+     * @param
+     * @return
+     * @date 2019/3/21 22:22
+     * @author Shawn Wu
+     */
     @RequestMapping("/hello")
     public String hello() {
+
         return "Hello World!";
+    }
+
+    /**
+     * @Description 测试redis
+     * @param
+     * @return
+     * @date 2019/3/21 22:25
+     * @author Shawn Wu
+     */
+    @RequestMapping("/redisTest")
+    public String redisTest() {
+        redisTemplate.opsForValue().set("redisTest", "success");
+        String success = (String)redisTemplate.opsForValue().get("redisTest");
+        System.out.println("测试redis: " + success);
+        redisTemplate.delete("redisTest");
+        return success;
     }
 
     @RequestMapping("/config")
