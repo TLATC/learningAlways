@@ -4,6 +4,7 @@
 server:
   tomcat:
     uri-encoding: utf-8
+  context-path: /learningAlways
 
 spring:
     profiles:
@@ -11,37 +12,11 @@ spring:
       active: dev
     output:
       ansi:
-        enabled: detect #检查终端是否支持ANSI，是的话就采用彩色输出 todo:改变配置并未生效
-    redis:
-        host: 10.0.10.238
-        port: 6379
-        password: 123456
-        pool:
-          max-active: 8
-          max-wait: 1
-          max-idle: 8
-          min-idle: 0
-        timeout: 0
-    
-    ## redis主从版配置
-#    pool:
-#      # 连接池最大连接数（使用负值表示没有限制）
-#      max-active: 300
-#      # 连接池最大阻塞等待时间（使用负值表示没有限制）
-#      max-wait: -1
-#      # 连接池中的最大空闲连接
-#      max-idle: 20
-#      # 连接池中的最小空闲连接
-#      min-idle: 20
-#    # 连接超时时间（毫秒）
-#    timeout: 60000
-#    sentinel:
-#      # 哨兵监听的reids server的名称
-#      master: mymaster
-#      # 哨兵的配置列表
-#      nodes: 10.0.12.33:26379,10.0.12.34:26379
-#    # 主从节点均为此密码，对应redis配置文件中的masterauth
-#    password: 123456
+        # 检查终端是否支持ANSI，是的话就采用彩色输出 todo:改变配置并未生效
+        enabled: detect
+
+mybatis:
+  type-aliases-package: com.shawn.learningalways.*.model
 
 context:
     # 监听器
