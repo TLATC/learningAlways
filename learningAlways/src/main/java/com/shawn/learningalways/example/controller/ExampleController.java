@@ -2,7 +2,9 @@ package com.shawn.learningalways.example.controller;
 
 import com.shawn.learningalways.base.controller.BaseController;
 import com.shawn.learningalways.base.model.JsonResult;
+import com.shawn.learningalways.example.model.Example;
 import com.shawn.learningalways.example.model.YmlProperties;
+import com.shawn.learningalways.example.service.ExampleService;
 import com.shawn.learningalways.example.task.AsyncTasks;
 import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.concurrent.Future;
 
 /**
@@ -40,6 +43,11 @@ public class ExampleController extends BaseController{
     private AsyncTasks asyncTasks;
     @Autowired
     RedisTemplate redisTemplate;
+    /**
+     * 示例service
+     */
+    @Autowired
+    ExampleService exampleService;
 
 
     /**
@@ -133,6 +141,19 @@ public class ExampleController extends BaseController{
         asyncTasks.doTaskExecutorTwo(); //执行任务二
         asyncTasks.doTaskExecutorThree(); //执行任务三
         Thread.currentThread().join();
+    }
+
+    /**
+     * @Description 获取example列表
+     * @param
+     * @return 
+     * @date 2019/3/27 18:18
+     * @auther Shawn Wu
+     */
+    @RequestMapping("/getExampleList")
+    public JsonResult getExampleList(){
+        List<Example> exampleList = exampleService.getExampleList();
+        return renderSuccess(exampleList);
     }
 
 }

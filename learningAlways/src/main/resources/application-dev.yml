@@ -86,7 +86,7 @@ spring:
 
 mybatis:
   # mapperLocations指的路径是src/main/resources
-  mapper-locations: classpath:mapper/${spring.datasource.name}/*/*.xml
+  mapper-locations: classpath:mapper/${spring.datasource.name}/*/*Mapper.xml
 
 
 #日志配置

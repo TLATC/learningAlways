@@ -1,5 +1,6 @@
 package com.shawn.learningalways;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -45,7 +46,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableScheduling //开启定时任务
 @EnableAsync //开启异步任务
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+@MapperScan("com.shawn.learningalways.*.dao") //mybatis接口扫描
 public class LearningAlwaysApplication {
 
 	/**
