@@ -1,9 +1,12 @@
 package com.shawn.learningalways;
 
 import com.shawn.learningalways.example.controller.HelloController;
+import com.shawn.learningalways.example.model.YmlProperties;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -17,6 +20,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class LearningAlwaysApplicationTests {
+
+	/**
+	 * 配置文件对象
+	 */
+	@Autowired
+	private YmlProperties ymlProperties;
 
 	/**
 	 * MockMvc实现了对Http请求的模拟，但不依赖于网络环境
@@ -53,8 +62,15 @@ public class LearningAlwaysApplicationTests {
 				.andExpect(content().string(equalTo("Hello World!")));
 	}
 
-
+	/**
+	 * @Description 测试读配置文件
+	 * @param
+	 * @return
+	 * @date 2019/4/9 21:18
+	 * @author Shawn Wu
+	 */
 	@Test
-	public void contextLoads() {
+	public void ymlPropertiesLoads() throws Exception{
+		Assert.assertEquals(ymlProperties.getActive(), "dev");
 	}
 }

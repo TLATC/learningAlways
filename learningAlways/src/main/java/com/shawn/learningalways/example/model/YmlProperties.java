@@ -33,7 +33,7 @@ public class YmlProperties {
     /**
      * dev配置文件中的desc
      */
-    @Value("${com.shawn.learningalways.desc}")
+    @Value("${com.shawn.LearningAlways.desc}")
     private String desc;
     /**
      * dev配置文件中的server.port
