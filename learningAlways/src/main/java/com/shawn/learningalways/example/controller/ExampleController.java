@@ -6,7 +6,6 @@ import com.shawn.learningalways.example.model.Example;
 import com.shawn.learningalways.example.model.YmlProperties;
 import com.shawn.learningalways.example.service.ExampleService;
 import com.shawn.learningalways.example.task.AsyncTasks;
-import com.sun.net.httpserver.Authenticator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,19 +48,6 @@ public class ExampleController extends BaseController{
     @Autowired
     ExampleService exampleService;
 
-
-    /**
-     * @Description 每个工程都应该有个Hello World
-     * @param
-     * @return
-     * @date 2019/3/21 22:22
-     * @author Shawn Wu
-     */
-    @RequestMapping("/hello")
-    public String hello() {
-
-        return "Hello World!";
-    }
 
     /**
      * @Description 测试redis
