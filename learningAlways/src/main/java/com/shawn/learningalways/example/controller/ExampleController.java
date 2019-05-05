@@ -1,13 +1,16 @@
 package com.shawn.learningalways.example.controller;
 
+import com.github.pagehelper.PageHelper;
 import com.shawn.learningalways.base.controller.BaseController;
 import com.shawn.learningalways.base.model.JsonResult;
+import com.shawn.learningalways.base.model.PageBean;
 import com.shawn.learningalways.example.model.Example;
 import com.shawn.learningalways.example.model.YmlProperties;
 import com.shawn.learningalways.example.service.ExampleService;
 import com.shawn.learningalways.example.task.AsyncTasks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,6 +31,7 @@ import java.util.concurrent.Future;
  * 修改记录: 修改日期 修改人员 修改说明
  */
 @RestController
+@RequestMapping("/example")
 public class ExampleController extends BaseController{
 
     /**
@@ -88,7 +92,7 @@ public class ExampleController extends BaseController{
     @RequestMapping("/renderTest")
     public JsonResult renderTest(int flag){
         if(0==flag){
-           return renderError("返回错误");
+            return renderError("返回错误");
         }
         return renderSuccess("返回成功");
     }
@@ -132,7 +136,7 @@ public class ExampleController extends BaseController{
     /**
      * @Description 获取example列表
      * @param
-     * @return 
+     * @return
      * @date 2019/3/27 18:18
      * @auther Shawn Wu
      */
@@ -140,6 +144,28 @@ public class ExampleController extends BaseController{
     public JsonResult getExampleList(){
         List<Example> exampleList = exampleService.getExampleList();
         return renderSuccess(exampleList);
+    }
+
+    /**
+     * @Description 分页获取example列表
+     * @param pageBean 分页对象
+     * @param example 示例实体类
+     * @return
+     * @date 2019/5/5 15:23
+     * @auther Shawn Wu
+     */
+    @PostMapping("/getExampleListByPage")
+    public JsonResult getExampleListByPage(PageBean<Example> pageBean, Example example){
+        // 设置分页信息（必须在执行sql方法前设置）
+        PageHelper.startPage(pageBean.getPageNo(), pageBean.getPageSize());
+        // 获取满足条件的example列表
+        List<Example> exampleList = exampleService.getExampleListByCondition(example);
+
+        // 分页查询结果数据
+        pageBean.setRecords(exampleList);
+        // 总数据条数（总条数方法需要自己写）
+        pageBean.setTotalNum(exampleService.getExampleCountByCondition(example));
+        return renderSuccess(pageBean);
     }
 
     public static void main(String[] args) {

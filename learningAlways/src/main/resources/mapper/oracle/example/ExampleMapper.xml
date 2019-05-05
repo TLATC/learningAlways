@@ -9,4 +9,39 @@
          where t.deltag = '0'
 	</select>
 
+	<!-- 根据条件查询example列表 -->
+	<select id="getExampleListByCondition" parameterType="com.shawn.learningalways.example.model.Example"
+			resultType="com.shawn.learningalways.example.model.Example">
+		select * from t_shawn_example t
+		where t.deltag = '0'
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		<if test="name != null and name != ''">
+			and name = #{name}
+		</if>
+		<if test="age != null and age != ''">
+			and age = #{age}
+		</if>
+		order by createtime desc
+	</select>
+
+	<!-- 获取满足条件的example数量 -->
+	<select id="getExampleCountByCondition" parameterType="com.shawn.learningalways.example.model.Example"
+			resultType="java.lang.Integer">
+		select count(*) from t_shawn_example t
+		where t.deltag = '0'
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		<if test="name != null and name != ''">
+			and name = #{name}
+		</if>
+		<if test="age != null and age != ''">
+			and age = #{age}
+		</if>
+	</select>
+
+
+
 </mapper>
