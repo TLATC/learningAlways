@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.shawn.learningalways.base.controller.BaseController;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.base.model.PageBean;
+import com.shawn.learningalways.example.annotation.TestAnnotation;
 import com.shawn.learningalways.example.model.Example;
 import com.shawn.learningalways.example.model.YmlProperties;
 import com.shawn.learningalways.example.service.ExampleService;
@@ -131,6 +132,19 @@ public class ExampleController extends BaseController{
         asyncTasks.doTaskExecutorTwo(); //执行任务二
         asyncTasks.doTaskExecutorThree(); //执行任务三
         Thread.currentThread().join();
+    }
+
+    /**
+     * @Description 测试自定义注解
+     * @param
+     * @return
+     * @date 2019/5/6 11:44
+     * @auther Shawn Wu
+     */
+    @RequestMapping("/annotationTest")
+    @TestAnnotation
+    public JsonResult annotationTest(){
+        return renderSuccess();
     }
 
     /**
