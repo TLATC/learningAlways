@@ -51,7 +51,7 @@ public class WebLogAspect2 {
     @Before("webLog()")
     public void doBefore(JoinPoint joinPoint) throws Throwable{
         startTime.set(System.currentTimeMillis());
-        LOGGER.debug("用切面在方法执行前的打印，本切面类优先级为10");
+//        LOGGER.debug("用切面在方法执行前的打印，本切面类优先级为10");
     }
 
     /**
@@ -61,9 +61,9 @@ public class WebLogAspect2 {
      */
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) throws Throwable{
-        LOGGER.debug("用切面在方法执行后的打印，方法返回值是：" + ret);
-        LOGGER.debug("本方法的耗时是：" + (System.currentTimeMillis()-startTime.get()));
-        LOGGER.debug("本切面类优先级为10");
+//        LOGGER.debug("用切面在方法执行后的打印，方法返回值是：" + ret);
+//        LOGGER.debug("本方法的耗时是：" + (System.currentTimeMillis()-startTime.get()));
+//        LOGGER.debug("本切面类优先级为10");
     }
 
 }

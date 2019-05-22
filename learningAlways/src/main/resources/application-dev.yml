@@ -92,7 +92,7 @@ mybatis:
 #日志配置
 logging:
   level:
-   com.shawn.LearningAlways: debug
+   com.shawn.learningalways: debug
 
 
 #自定义属性
