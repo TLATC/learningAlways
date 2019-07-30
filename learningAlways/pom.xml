@@ -115,8 +115,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			<!--生成git.properties，记录git提交信息-->
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<configuration>
+					<!--日期格式;默认值:dd.MM.yyyy '@' HH:mm:ss z;-->
+					<dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
+					<!--".git"文件夹未找到时,构建是否失败;若设置true,则构建失败;若设置false,则跳过执行该目标;默认值:true;-->
+					<failOnNoGitDirectory>false</failOnNoGitDirectory>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
-
 
 </project>
