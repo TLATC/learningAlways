@@ -1,0 +1,13 @@
+server:
+  port: 1001
+  tomcat:
+    uri-encoding: utf-8
+  context-path: /es
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    # 作为服务注册中心，自己不注册
+    register-with-eureka: false
+    fetch-registry: false
