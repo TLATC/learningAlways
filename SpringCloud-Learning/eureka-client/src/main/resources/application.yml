@@ -1,0 +1,14 @@
+server:
+  port: 2001
+  tomcat:
+    uri-encoding: utf-8
+  context-path: /eclient
+spring:
+  application:
+    # 微服务名称
+    name: eureka-client
+eureka:
+  client:
+    serviceUrl:
+      # 服务注册中心地址
+      defaultZone: http://localhost:1001/es/eureka/
