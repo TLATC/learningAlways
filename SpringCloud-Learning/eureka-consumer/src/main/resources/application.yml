@@ -1,0 +1,14 @@
+server:
+  port: 2101
+  tomcat:
+    uri-encoding: utf-8
+  context-path: /econsumer
+spring:
+  application:
+    # 微服务名称
+    name: eureka-consumer
+eureka:
+  client:
+    serviceUrl:
+      # 服务注册中心地址
+      defaultZone: http://localhost:1001/es/eureka/
