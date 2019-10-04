@@ -26,7 +26,7 @@ public class DcController {
      * @date 2019/9/23 17:09
      * @auther Shawn Wu
      */
-    @GetMapping()
+    @GetMapping("/dc")
     public String dc(){
         String services = "Services：" + discoveryClient.getServices();
         System.out.println(services);

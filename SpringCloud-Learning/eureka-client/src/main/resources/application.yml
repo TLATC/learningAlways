@@ -1,14 +1,14 @@
 server:
-  port: 2001
+  port: 1500
   tomcat:
     uri-encoding: utf-8
   context-path: /eclient
 spring:
   application:
-    # Î¢·şÎñÃû³Æ
+    # å¾®æœåŠ¡åç§°
     name: eureka-client
 eureka:
   client:
     serviceUrl:
-      # ·şÎñ×¢²áÖĞĞÄµØÖ·
-      defaultZone: http://localhost:1001/es/eureka/
+      # æ³¨å†Œä¸­å¿ƒåœ°å€ã€‚é›†ç¾¤ç¯å¢ƒç”¨é€—å·åˆ†éš”
+      defaultZone: http://10.0.11.89:1001/es/eureka/
