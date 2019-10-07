@@ -1,5 +1,6 @@
-package com.shawn.eurekaconsumer;
+package com.shawn.eurekaconsumer.controller;
 
+import com.shawn.eurekaconsumer.service.DcFeignClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
