@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration >
+
+    <!-- 本地数据库驱动包位置 -->
+    <classPathEntry location="D:\apache-maven-3.2.5\mvnRespo\com\oracle\ojdbc6\1.0\ojdbc6-1.0.jar" />
+
+    <context id="DB2Tables"  targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--数据库链接URL，用户名、密码 -->
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS_LIST =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.0.11.235)(PORT = 1521)) )(CONNECT_DATA =(SERVICE_NAME = IPCC)))" userId="zh_236" password="123456">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!-- 生成模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.shawn.learningalways.mybatisgenerator.model" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- 生成映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="mybatisgenerator" targetProject="src/main/resources/mapper/oracle">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- 生成DAO的包名和位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.shawn.learningalways.mybatisgenerator.dao" targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
+        <table tableName="T_TEST1" domainObjectName="MybatisGeneratorDO" >
+            <columnOverride column="TEMPLATEID" property="templateId" javaType="String"/>
+            <columnOverride column="BATCHNUM" property="batchNum" javaType="String"/>
+            <columnOverride column="BATCHCREATIONTIME" property="batchCreationTime" javaType="String"/>
+            <columnOverride column="RULESTATE" property="ruleState" javaType="String"/>
+            <columnOverride column="RULEMODIFIEDTIME" property="ruleModifiedTime" javaType="String"/>
+            <columnOverride column="QNAIREID" property="qnaireId" javaType="String"/>
+        </table>
+    </context>
+</generatorConfiguration>

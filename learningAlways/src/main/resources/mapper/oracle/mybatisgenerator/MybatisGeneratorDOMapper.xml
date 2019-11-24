@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shawn.learningalways.mybatisgenerator.dao.MybatisGeneratorDOMapper" >
+  <resultMap id="BaseResultMap" type="com.shawn.learningalways.mybatisgenerator.model.MybatisGeneratorDO" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="TEMPLATEID" property="templateId" jdbcType="VARCHAR" />
+    <result column="BATCHNUM" property="batchNum" jdbcType="VARCHAR" />
+    <result column="BATCHCREATIONTIME" property="batchCreationTime" jdbcType="CHAR" />
+    <result column="RULESTATE" property="ruleState" jdbcType="VARCHAR" />
+    <result column="RULEMODIFIEDTIME" property="ruleModifiedTime" jdbcType="CHAR" />
+    <result column="QNAIREID" property="qnaireId" jdbcType="VARCHAR" />
+    <result column="QNAIRESTATE" property="qnairestate" jdbcType="CHAR" />
+    <result column="QNAIREMODIFIEDTIME" property="qnairemodifiedtime" jdbcType="CHAR" />
+    <result column="ACTIVITYID" property="activityid" jdbcType="VARCHAR" />
+    <result column="PRIORITY" property="priority" jdbcType="CHAR" />
+    <result column="APPOINTMENTDATE" property="appointmentdate" jdbcType="CHAR" />
+    <result column="APPOINTMENTTIME" property="appointmenttime" jdbcType="VARCHAR" />
+    <result column="APPOINTMENTTIMESLOT" property="appointmenttimeslot" jdbcType="VARCHAR" />
+    <result column="DATASTATE" property="datastate" jdbcType="CHAR" />
+    <result column="RETURNSTATE" property="returnstate" jdbcType="CHAR" />
+    <result column="ISMATCHQNAIRE" property="ismatchqnaire" jdbcType="CHAR" />
+    <result column="EXTRACTIONTIME" property="extractiontime" jdbcType="CHAR" />
+    <result column="MODIFIEDTIME" property="modifiedtime" jdbcType="CHAR" />
+    <result column="NUM" property="num" jdbcType="VARCHAR" />
+    <result column="QUEUE" property="queue" jdbcType="VARCHAR" />
+    <result column="CHECKNUM" property="checknum" jdbcType="VARCHAR" />
+    <result column="ISVISITTWO" property="isvisittwo" jdbcType="VARCHAR" />
+    <result column="FEEDBACKRESULT" property="feedbackresult" jdbcType="VARCHAR" />
+    <result column="FEEDBACKPHONE" property="feedbackphone" jdbcType="VARCHAR" />
+    <result column="RETURNVISITTIME" property="returnvisittime" jdbcType="VARCHAR" />
+    <result column="PROBLEMTYPE" property="problemtype" jdbcType="VARCHAR" />
+    <result column="DISPOSETIME" property="disposetime" jdbcType="VARCHAR" />
+    <result column="DISPOSERESULT" property="disposeresult" jdbcType="VARCHAR" />
+    <result column="VISITTWOINSERTTIME" property="visittwoinserttime" jdbcType="VARCHAR" />
+    <result column="VISITCOUNT" property="visitcount" jdbcType="VARCHAR" />
+    <result column="CALLLOSTFLAG" property="calllostflag" jdbcType="CHAR" />
+    <result column="LASTVISITRESULT" property="lastvisitresult" jdbcType="VARCHAR" />
+    <result column="LASTVISITUSER" property="lastvisituser" jdbcType="VARCHAR" />
+    <result column="VISITAGENTID" property="visitagentid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TEMPLATEID, BATCHNUM, BATCHCREATIONTIME, RULESTATE, RULEMODIFIEDTIME, QNAIREID, 
+    QNAIRESTATE, QNAIREMODIFIEDTIME, ACTIVITYID, PRIORITY, APPOINTMENTDATE, APPOINTMENTTIME, 
+    APPOINTMENTTIMESLOT, DATASTATE, RETURNSTATE, ISMATCHQNAIRE, EXTRACTIONTIME, MODIFIEDTIME, 
+    NUM, QUEUE, CHECKNUM, ISVISITTWO, FEEDBACKRESULT, FEEDBACKPHONE, RETURNVISITTIME, 
+    PROBLEMTYPE, DISPOSETIME, DISPOSERESULT, VISITTWOINSERTTIME, VISITCOUNT, CALLLOSTFLAG, 
+    LASTVISITRESULT, LASTVISITUSER, VISITAGENTID
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shawn.learningalways.mybatisgenerator.model.MybatisGeneratorDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_TEST1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_TEST1
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_TEST1
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shawn.learningalways.mybatisgenerator.model.MybatisGeneratorDOExample" >
+    delete from T_TEST1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shawn.learningalways.mybatisgenerator.model.MybatisGeneratorDO" >
+    insert into T_TEST1 (ID, TEMPLATEID, BATCHNUM, 
+      BATCHCREATIONTIME, RULESTATE, RULEMODIFIEDTIME, 
+      QNAIREID, QNAIRESTATE, QNAIREMODIFIEDTIME, 
+      ACTIVITYID, PRIORITY, APPOINTMENTDATE, 
+      APPOINTMENTTIME, APPOINTMENTTIMESLOT, DATASTATE, 
+      RETURNSTATE, ISMATCHQNAIRE, EXTRACTIONTIME, 
+      MODIFIEDTIME, NUM, QUEUE, 
+      CHECKNUM, ISVISITTWO, FEEDBACKRESULT, 
+      FEEDBACKPHONE, RETURNVISITTIME, PROBLEMTYPE, 
+      DISPOSETIME, DISPOSERESULT, VISITTWOINSERTTIME, 
+      VISITCOUNT, CALLLOSTFLAG, LASTVISITRESULT, 
+      LASTVISITUSER, VISITAGENTID)
+    values (#{id,jdbcType=VARCHAR}, #{templateId,jdbcType=VARCHAR}, #{batchNum,jdbcType=VARCHAR}, 
+      #{batchCreationTime,jdbcType=CHAR}, #{ruleState,jdbcType=VARCHAR}, #{ruleModifiedTime,jdbcType=CHAR}, 
+      #{qnaireId,jdbcType=VARCHAR}, #{qnairestate,jdbcType=CHAR}, #{qnairemodifiedtime,jdbcType=CHAR}, 
+      #{activityid,jdbcType=VARCHAR}, #{priority,jdbcType=CHAR}, #{appointmentdate,jdbcType=CHAR}, 
+      #{appointmenttime,jdbcType=VARCHAR}, #{appointmenttimeslot,jdbcType=VARCHAR}, #{datastate,jdbcType=CHAR}, 
+      #{returnstate,jdbcType=CHAR}, #{ismatchqnaire,jdbcType=CHAR}, #{extractiontime,jdbcType=CHAR}, 
+      #{modifiedtime,jdbcType=CHAR}, #{num,jdbcType=VARCHAR}, #{queue,jdbcType=VARCHAR}, 
+      #{checknum,jdbcType=VARCHAR}, #{isvisittwo,jdbcType=VARCHAR}, #{feedbackresult,jdbcType=VARCHAR}, 
+      #{feedbackphone,jdbcType=VARCHAR}, #{returnvisittime,jdbcType=VARCHAR}, #{problemtype,jdbcType=VARCHAR}, 
+      #{disposetime,jdbcType=VARCHAR}, #{disposeresult,jdbcType=VARCHAR}, #{visittwoinserttime,jdbcType=VARCHAR}, 
+      #{visitcount,jdbcType=VARCHAR}, #{calllostflag,jdbcType=CHAR}, #{lastvisitresult,jdbcType=VARCHAR}, 
+      #{lastvisituser,jdbcType=VARCHAR}, #{visitagentid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shawn.learningalways.mybatisgenerator.model.MybatisGeneratorDO" >
+    insert into T_TEST1
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="templateId != null" >
+        TEMPLATEID,
+      </if>
+      <if test="batchNum != null" >
+        BATCHNUM,
+      </if>
+      <if test="batchCreationTime != null" >
+        BATCHCREATIONTIME,
+      </if>
+      <if test="ruleState != null" >
+        RULESTATE,
+      </if>
+      <if test="ruleModifiedTime != null" >
+        RULEMODIFIEDTIME,
+      </if>
+      <if test="qnaireId != null" >
+        QNAIREID,
+      </if>
+      <if test="qnairestate != null" >
+        QNAIRESTATE,
+      </if>
+      <if test="qnairemodifiedtime != null" >
+        QNAIREMODIFIEDTIME,
+      </if>
+      <if test="activityid != null" >
+        ACTIVITYID,
+      </if>
+      <if test="priority != null" >
+        PRIORITY,
+      </if>
+      <if test="appointmentdate != null" >
+        APPOINTMENTDATE,
+      </if>
+      <if test="appointmenttime != null" >
+        APPOINTMENTTIME,
+      </if>
+      <if test="appointmenttimeslot != null" >
+        APPOINTMENTTIMESLOT,
+      </if>
+      <if test="datastate != null" >
+        DATASTATE,
+      </if>
+      <if test="returnstate != null" >
+        RETURNSTATE,
+      </if>
+      <if test="ismatchqnaire != null" >
+        ISMATCHQNAIRE,
+      </if>
+      <if test="extractiontime != null" >
+        EXTRACTIONTIME,
+      </if>
+      <if test="modifiedtime != null" >
+        MODIFIEDTIME,
+      </if>
+      <if test="num != null" >
+        NUM,
+      </if>
+      <if test="queue != null" >
+        QUEUE,
+      </if>
+      <if test="checknum != null" >
+        CHECKNUM,
+      </if>
+      <if test="isvisittwo != null" >
+        ISVISITTWO,
+      </if>
+      <if test="feedbackresult != null" >
+        FEEDBACKRESULT,
+      </if>
+      <if test="feedbackphone != null" >
+        FEEDBACKPHONE,
+      </if>
+      <if test="returnvisittime != null" >
+        RETURNVISITTIME,
+      </if>
+      <if test="problemtype != null" >
+        PROBLEMTYPE,
+      </if>
+      <if test="disposetime != null" >
+        DISPOSETIME,
+      </if>
+      <if test="disposeresult != null" >
+        DISPOSERESULT,
+      </if>
+      <if test="visittwoinserttime != null" >
+        VISITTWOINSERTTIME,
+      </if>
+      <if test="visitcount != null" >
+        VISITCOUNT,
+      </if>
+      <if test="calllostflag != null" >
+        CALLLOSTFLAG,
+      </if>
+      <if test="lastvisitresult != null" >
+        LASTVISITRESULT,
+      </if>
+      <if test="lastvisituser != null" >
+        LASTVISITUSER,
+      </if>
+      <if test="visitagentid != null" >
+        VISITAGENTID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="templateId != null" >
+        #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNum != null" >
+        #{batchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="batchCreationTime != null" >
+        #{batchCreationTime,jdbcType=CHAR},
+      </if>
+      <if test="ruleState != null" >
+        #{ruleState,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleModifiedTime != null" >
+        #{ruleModifiedTime,jdbcType=CHAR},
+      </if>
+      <if test="qnaireId != null" >
+        #{qnaireId,jdbcType=VARCHAR},
+      </if>
+      <if test="qnairestate != null" >
+        #{qnairestate,jdbcType=CHAR},
+      </if>
+      <if test="qnairemodifiedtime != null" >
+        #{qnairemodifiedtime,jdbcType=CHAR},
+      </if>
+      <if test="activityid != null" >
+        #{activityid,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        #{priority,jdbcType=CHAR},
+      </if>
+      <if test="appointmentdate != null" >
+        #{appointmentdate,jdbcType=CHAR},
+      </if>
+      <if test="appointmenttime != null" >
+        #{appointmenttime,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmenttimeslot != null" >
+        #{appointmenttimeslot,jdbcType=VARCHAR},
+      </if>
+      <if test="datastate != null" >
+        #{datastate,jdbcType=CHAR},
+      </if>
+      <if test="returnstate != null" >
+        #{returnstate,jdbcType=CHAR},
+      </if>
+      <if test="ismatchqnaire != null" >
+        #{ismatchqnaire,jdbcType=CHAR},
+      </if>
+      <if test="extractiontime != null" >
+        #{extractiontime,jdbcType=CHAR},
+      </if>
+      <if test="modifiedtime != null" >
+        #{modifiedtime,jdbcType=CHAR},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="queue != null" >
+        #{queue,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null" >
+        #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="isvisittwo != null" >
+        #{isvisittwo,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackresult != null" >
+        #{feedbackresult,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackphone != null" >
+        #{feedbackphone,jdbcType=VARCHAR},
+      </if>
+      <if test="returnvisittime != null" >
+        #{returnvisittime,jdbcType=VARCHAR},
+      </if>
+      <if test="problemtype != null" >
+        #{problemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="disposetime != null" >
+        #{disposetime,jdbcType=VARCHAR},
+      </if>
+      <if test="disposeresult != null" >
+        #{disposeresult,jdbcType=VARCHAR},
+      </if>
+      <if test="visittwoinserttime != null" >
+        #{visittwoinserttime,jdbcType=VARCHAR},
+      </if>
+      <if test="visitcount != null" >
+        #{visitcount,jdbcType=VARCHAR},
+      </if>
+      <if test="calllostflag != null" >
+        #{calllostflag,jdbcType=CHAR},
+      </if>
+      <if test="lastvisitresult != null" >
+        #{lastvisitresult,jdbcType=VARCHAR},
+      </if>
+      <if test="lastvisituser != null" >
+        #{lastvisituser,jdbcType=VARCHAR},
+      </if>
+      <if test="visitagentid != null" >
+        #{visitagentid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shawn.learningalways.mybatisgenerator.model.MybatisGeneratorDOExample" resultType="java.lang.Integer" >
+    select count(*) from T_TEST1
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update T_TEST1
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.templateId != null" >
+        TEMPLATEID = #{record.templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchNum != null" >
+        BATCHNUM = #{record.batchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchCreationTime != null" >
+        BATCHCREATIONTIME = #{record.batchCreationTime,jdbcType=CHAR},
+      </if>
+      <if test="record.ruleState != null" >
+        RULESTATE = #{record.ruleState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ruleModifiedTime != null" >
+        RULEMODIFIEDTIME = #{record.ruleModifiedTime,jdbcType=CHAR},
+      </if>
+      <if test="record.qnaireId != null" >
+        QNAIREID = #{record.qnaireId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.qnairestate != null" >
+        QNAIRESTATE = #{record.qnairestate,jdbcType=CHAR},
+      </if>
+      <if test="record.qnairemodifiedtime != null" >
+        QNAIREMODIFIEDTIME = #{record.qnairemodifiedtime,jdbcType=CHAR},
+      </if>
+      <if test="record.activityid != null" >
+        ACTIVITYID = #{record.activityid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.priority != null" >
+        PRIORITY = #{record.priority,jdbcType=CHAR},
+      </if>
+      <if test="record.appointmentdate != null" >
+        APPOINTMENTDATE = #{record.appointmentdate,jdbcType=CHAR},
+      </if>
+      <if test="record.appointmenttime != null" >
+        APPOINTMENTTIME = #{record.appointmenttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appointmenttimeslot != null" >
+        APPOINTMENTTIMESLOT = #{record.appointmenttimeslot,jdbcType=VARCHAR},
+      </if>
+      <if test="record.datastate != null" >
+        DATASTATE = #{record.datastate,jdbcType=CHAR},
+      </if>
+      <if test="record.returnstate != null" >
+        RETURNSTATE = #{record.returnstate,jdbcType=CHAR},
+      </if>
+      <if test="record.ismatchqnaire != null" >
+        ISMATCHQNAIRE = #{record.ismatchqnaire,jdbcType=CHAR},
+      </if>
+      <if test="record.extractiontime != null" >
+        EXTRACTIONTIME = #{record.extractiontime,jdbcType=CHAR},
+      </if>
+      <if test="record.modifiedtime != null" >
+        MODIFIEDTIME = #{record.modifiedtime,jdbcType=CHAR},
+      </if>
+      <if test="record.num != null" >
+        NUM = #{record.num,jdbcType=VARCHAR},
+      </if>
+      <if test="record.queue != null" >
+        QUEUE = #{record.queue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checknum != null" >
+        CHECKNUM = #{record.checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isvisittwo != null" >
+        ISVISITTWO = #{record.isvisittwo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackresult != null" >
+        FEEDBACKRESULT = #{record.feedbackresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feedbackphone != null" >
+        FEEDBACKPHONE = #{record.feedbackphone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnvisittime != null" >
+        RETURNVISITTIME = #{record.returnvisittime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.problemtype != null" >
+        PROBLEMTYPE = #{record.problemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disposetime != null" >
+        DISPOSETIME = #{record.disposetime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.disposeresult != null" >
+        DISPOSERESULT = #{record.disposeresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visittwoinserttime != null" >
+        VISITTWOINSERTTIME = #{record.visittwoinserttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitcount != null" >
+        VISITCOUNT = #{record.visitcount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calllostflag != null" >
+        CALLLOSTFLAG = #{record.calllostflag,jdbcType=CHAR},
+      </if>
+      <if test="record.lastvisitresult != null" >
+        LASTVISITRESULT = #{record.lastvisitresult,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastvisituser != null" >
+        LASTVISITUSER = #{record.lastvisituser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.visitagentid != null" >
+        VISITAGENTID = #{record.visitagentid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update T_TEST1
+    set ID = #{record.id,jdbcType=VARCHAR},
+      TEMPLATEID = #{record.templateId,jdbcType=VARCHAR},
+      BATCHNUM = #{record.batchNum,jdbcType=VARCHAR},
+      BATCHCREATIONTIME = #{record.batchCreationTime,jdbcType=CHAR},
+      RULESTATE = #{record.ruleState,jdbcType=VARCHAR},
+      RULEMODIFIEDTIME = #{record.ruleModifiedTime,jdbcType=CHAR},
+      QNAIREID = #{record.qnaireId,jdbcType=VARCHAR},
+      QNAIRESTATE = #{record.qnairestate,jdbcType=CHAR},
+      QNAIREMODIFIEDTIME = #{record.qnairemodifiedtime,jdbcType=CHAR},
+      ACTIVITYID = #{record.activityid,jdbcType=VARCHAR},
+      PRIORITY = #{record.priority,jdbcType=CHAR},
+      APPOINTMENTDATE = #{record.appointmentdate,jdbcType=CHAR},
+      APPOINTMENTTIME = #{record.appointmenttime,jdbcType=VARCHAR},
+      APPOINTMENTTIMESLOT = #{record.appointmenttimeslot,jdbcType=VARCHAR},
+      DATASTATE = #{record.datastate,jdbcType=CHAR},
+      RETURNSTATE = #{record.returnstate,jdbcType=CHAR},
+      ISMATCHQNAIRE = #{record.ismatchqnaire,jdbcType=CHAR},
+      EXTRACTIONTIME = #{record.extractiontime,jdbcType=CHAR},
+      MODIFIEDTIME = #{record.modifiedtime,jdbcType=CHAR},
+      NUM = #{record.num,jdbcType=VARCHAR},
+      QUEUE = #{record.queue,jdbcType=VARCHAR},
+      CHECKNUM = #{record.checknum,jdbcType=VARCHAR},
+      ISVISITTWO = #{record.isvisittwo,jdbcType=VARCHAR},
+      FEEDBACKRESULT = #{record.feedbackresult,jdbcType=VARCHAR},
+      FEEDBACKPHONE = #{record.feedbackphone,jdbcType=VARCHAR},
+      RETURNVISITTIME = #{record.returnvisittime,jdbcType=VARCHAR},
+      PROBLEMTYPE = #{record.problemtype,jdbcType=VARCHAR},
+      DISPOSETIME = #{record.disposetime,jdbcType=VARCHAR},
+      DISPOSERESULT = #{record.disposeresult,jdbcType=VARCHAR},
+      VISITTWOINSERTTIME = #{record.visittwoinserttime,jdbcType=VARCHAR},
+      VISITCOUNT = #{record.visitcount,jdbcType=VARCHAR},
+      CALLLOSTFLAG = #{record.calllostflag,jdbcType=CHAR},
+      LASTVISITRESULT = #{record.lastvisitresult,jdbcType=VARCHAR},
+      LASTVISITUSER = #{record.lastvisituser,jdbcType=VARCHAR},
+      VISITAGENTID = #{record.visitagentid,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shawn.learningalways.mybatisgenerator.model.MybatisGeneratorDO" >
+    update T_TEST1
+    <set >
+      <if test="templateId != null" >
+        TEMPLATEID = #{templateId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchNum != null" >
+        BATCHNUM = #{batchNum,jdbcType=VARCHAR},
+      </if>
+      <if test="batchCreationTime != null" >
+        BATCHCREATIONTIME = #{batchCreationTime,jdbcType=CHAR},
+      </if>
+      <if test="ruleState != null" >
+        RULESTATE = #{ruleState,jdbcType=VARCHAR},
+      </if>
+      <if test="ruleModifiedTime != null" >
+        RULEMODIFIEDTIME = #{ruleModifiedTime,jdbcType=CHAR},
+      </if>
+      <if test="qnaireId != null" >
+        QNAIREID = #{qnaireId,jdbcType=VARCHAR},
+      </if>
+      <if test="qnairestate != null" >
+        QNAIRESTATE = #{qnairestate,jdbcType=CHAR},
+      </if>
+      <if test="qnairemodifiedtime != null" >
+        QNAIREMODIFIEDTIME = #{qnairemodifiedtime,jdbcType=CHAR},
+      </if>
+      <if test="activityid != null" >
+        ACTIVITYID = #{activityid,jdbcType=VARCHAR},
+      </if>
+      <if test="priority != null" >
+        PRIORITY = #{priority,jdbcType=CHAR},
+      </if>
+      <if test="appointmentdate != null" >
+        APPOINTMENTDATE = #{appointmentdate,jdbcType=CHAR},
+      </if>
+      <if test="appointmenttime != null" >
+        APPOINTMENTTIME = #{appointmenttime,jdbcType=VARCHAR},
+      </if>
+      <if test="appointmenttimeslot != null" >
+        APPOINTMENTTIMESLOT = #{appointmenttimeslot,jdbcType=VARCHAR},
+      </if>
+      <if test="datastate != null" >
+        DATASTATE = #{datastate,jdbcType=CHAR},
+      </if>
+      <if test="returnstate != null" >
+        RETURNSTATE = #{returnstate,jdbcType=CHAR},
+      </if>
+      <if test="ismatchqnaire != null" >
+        ISMATCHQNAIRE = #{ismatchqnaire,jdbcType=CHAR},
+      </if>
+      <if test="extractiontime != null" >
+        EXTRACTIONTIME = #{extractiontime,jdbcType=CHAR},
+      </if>
+      <if test="modifiedtime != null" >
+        MODIFIEDTIME = #{modifiedtime,jdbcType=CHAR},
+      </if>
+      <if test="num != null" >
+        NUM = #{num,jdbcType=VARCHAR},
+      </if>
+      <if test="queue != null" >
+        QUEUE = #{queue,jdbcType=VARCHAR},
+      </if>
+      <if test="checknum != null" >
+        CHECKNUM = #{checknum,jdbcType=VARCHAR},
+      </if>
+      <if test="isvisittwo != null" >
+        ISVISITTWO = #{isvisittwo,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackresult != null" >
+        FEEDBACKRESULT = #{feedbackresult,jdbcType=VARCHAR},
+      </if>
+      <if test="feedbackphone != null" >
+        FEEDBACKPHONE = #{feedbackphone,jdbcType=VARCHAR},
+      </if>
+      <if test="returnvisittime != null" >
+        RETURNVISITTIME = #{returnvisittime,jdbcType=VARCHAR},
+      </if>
+      <if test="problemtype != null" >
+        PROBLEMTYPE = #{problemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="disposetime != null" >
+        DISPOSETIME = #{disposetime,jdbcType=VARCHAR},
+      </if>
+      <if test="disposeresult != null" >
+        DISPOSERESULT = #{disposeresult,jdbcType=VARCHAR},
+      </if>
+      <if test="visittwoinserttime != null" >
+        VISITTWOINSERTTIME = #{visittwoinserttime,jdbcType=VARCHAR},
+      </if>
+      <if test="visitcount != null" >
+        VISITCOUNT = #{visitcount,jdbcType=VARCHAR},
+      </if>
+      <if test="calllostflag != null" >
+        CALLLOSTFLAG = #{calllostflag,jdbcType=CHAR},
+      </if>
+      <if test="lastvisitresult != null" >
+        LASTVISITRESULT = #{lastvisitresult,jdbcType=VARCHAR},
+      </if>
+      <if test="lastvisituser != null" >
+        LASTVISITUSER = #{lastvisituser,jdbcType=VARCHAR},
+      </if>
+      <if test="visitagentid != null" >
+        VISITAGENTID = #{visitagentid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shawn.learningalways.mybatisgenerator.model.MybatisGeneratorDO" >
+    update T_TEST1
+    set TEMPLATEID = #{templateId,jdbcType=VARCHAR},
+      BATCHNUM = #{batchNum,jdbcType=VARCHAR},
+      BATCHCREATIONTIME = #{batchCreationTime,jdbcType=CHAR},
+      RULESTATE = #{ruleState,jdbcType=VARCHAR},
+      RULEMODIFIEDTIME = #{ruleModifiedTime,jdbcType=CHAR},
+      QNAIREID = #{qnaireId,jdbcType=VARCHAR},
+      QNAIRESTATE = #{qnairestate,jdbcType=CHAR},
+      QNAIREMODIFIEDTIME = #{qnairemodifiedtime,jdbcType=CHAR},
+      ACTIVITYID = #{activityid,jdbcType=VARCHAR},
+      PRIORITY = #{priority,jdbcType=CHAR},
+      APPOINTMENTDATE = #{appointmentdate,jdbcType=CHAR},
+      APPOINTMENTTIME = #{appointmenttime,jdbcType=VARCHAR},
+      APPOINTMENTTIMESLOT = #{appointmenttimeslot,jdbcType=VARCHAR},
+      DATASTATE = #{datastate,jdbcType=CHAR},
+      RETURNSTATE = #{returnstate,jdbcType=CHAR},
+      ISMATCHQNAIRE = #{ismatchqnaire,jdbcType=CHAR},
+      EXTRACTIONTIME = #{extractiontime,jdbcType=CHAR},
+      MODIFIEDTIME = #{modifiedtime,jdbcType=CHAR},
+      NUM = #{num,jdbcType=VARCHAR},
+      QUEUE = #{queue,jdbcType=VARCHAR},
+      CHECKNUM = #{checknum,jdbcType=VARCHAR},
+      ISVISITTWO = #{isvisittwo,jdbcType=VARCHAR},
+      FEEDBACKRESULT = #{feedbackresult,jdbcType=VARCHAR},
+      FEEDBACKPHONE = #{feedbackphone,jdbcType=VARCHAR},
+      RETURNVISITTIME = #{returnvisittime,jdbcType=VARCHAR},
+      PROBLEMTYPE = #{problemtype,jdbcType=VARCHAR},
+      DISPOSETIME = #{disposetime,jdbcType=VARCHAR},
+      DISPOSERESULT = #{disposeresult,jdbcType=VARCHAR},
+      VISITTWOINSERTTIME = #{visittwoinserttime,jdbcType=VARCHAR},
+      VISITCOUNT = #{visitcount,jdbcType=VARCHAR},
+      CALLLOSTFLAG = #{calllostflag,jdbcType=CHAR},
+      LASTVISITRESULT = #{lastvisitresult,jdbcType=VARCHAR},
+      LASTVISITUSER = #{lastvisituser,jdbcType=VARCHAR},
+      VISITAGENTID = #{visitagentid,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <!-- 根据条件查询数据列表 -->
+  <select id="getMyGeneratorByCondition" resultMap="BaseResultMap" parameterType="com.shawn.learningalways.mybatisgenerator.model.MybatisGeneratorDO" >
+    select
+    <include refid="Base_Column_List" />
+    from T_TEST1
+    where 1=1
+    <if test="templateId != null and templateId != ''">
+      and templateId = #{templateId}
+    </if>
+    <if test="batchNum != null and batchNum != ''">
+      and batchNum = #{batchNum}
+    </if>
+    <if test="ruleState != null and ruleState != ''">
+      and ruleState = #{ruleState}
+    </if>
+    <if test="qnaireId != null and qnaireId != ''">
+      and qnaireId = #{qnaireId}
+    </if>
+  </select>
+</mapper>

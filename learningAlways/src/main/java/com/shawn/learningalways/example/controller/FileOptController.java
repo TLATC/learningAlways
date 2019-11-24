@@ -50,6 +50,7 @@ public class FileOptController extends BaseController{
 
     /**
      * @Description 访问upload.html，文件上传页面
+     *              路径为：http://localhost:5001/learningAlways/fileOpt/upload
      * @param
      * @return
      * @date 2019/5/8 9:48

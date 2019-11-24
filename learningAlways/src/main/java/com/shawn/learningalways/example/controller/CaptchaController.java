@@ -25,6 +25,7 @@ public class CaptchaController extends BaseController {
 
     /**
      * @Description 返回验证码页面
+     *              访问路径为：http://localhost:5001/learningAlways/captcha/captchaHtml
      * @param
      * @return 
      * @date 2019/5/17 17:28
