@@ -30,6 +30,16 @@ public class User extends BaseBean{
      */
     private String sex;
 
+    public User(){
+
+    }
+
+    public User(String userName, String age, String sex){
+        this.userName = userName;
+        this.age = age;
+        this.sex = sex;
+    }
+
     public String getUserName() {
         return userName;
     }
@@ -52,5 +62,14 @@ public class User extends BaseBean{
 
     public void setSex(String sex) {
         this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userName='" + userName + '\'' +
+                ", age='" + age + '\'' +
+                ", sex='" + sex + '\'' +
+                '}';
     }
 }
