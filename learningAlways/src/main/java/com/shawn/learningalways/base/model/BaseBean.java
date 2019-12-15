@@ -1,5 +1,7 @@
 package com.shawn.learningalways.base.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 
 /**
@@ -23,10 +25,6 @@ public class BaseBean implements Serializable {
     private static final long serialVersionUID = 8237913239742557480L;
 
     /**
-     * 主键ID
-     */
-    private String id;
-    /**
      * 创建人
      */
     private String creater;
@@ -47,13 +45,6 @@ public class BaseBean implements Serializable {
      */
     private String delTag;
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getCreater() {
         return creater;
