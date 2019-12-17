@@ -63,4 +63,14 @@ public class JsonResult {
     public void setObj(Object obj) {
         this.obj = obj;
     }
+
+    @Override
+    public String toString() {
+        return "JsonResult{" +
+                "success=" + success +
+                ", status='" + status + '\'' +
+                ", msg='" + msg + '\'' +
+                ", obj=" + obj +
+                '}';
+    }
 }
