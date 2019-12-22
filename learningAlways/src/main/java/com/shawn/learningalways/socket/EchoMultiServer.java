@@ -7,8 +7,7 @@ import org.springframework.stereotype.Component;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * @ClassName: EchoMultiServer
@@ -43,7 +42,11 @@ public class EchoMultiServer {
 //                new EchoClientHandler(serverSocket.accept()).start();
 
                 // 方式二：创建一个定长(10)线程池，可控制线程最大并发数，超出的线程会在队列中等待
-                ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10, new CustomizableThreadFactory("socket-thread-"));
+                ExecutorService fixedThreadPool = new ThreadPoolExecutor(10, 10,
+                        0L, TimeUnit.MILLISECONDS,
+                        new LinkedBlockingQueue<Runnable>(),
+                        new CustomizableThreadFactory("socket-thread-"));
+//                ExecutorService fixedThreadPool = Executors.newFixedThreadPool(10, new CustomizableThreadFactory("socket-thread-"));
                 SocketProcessor socketProcessor = new SocketProcessor();
                 socketProcessor.setSocket(serverSocket.accept());
                 fixedThreadPool.execute(socketProcessor);
