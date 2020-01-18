@@ -102,3 +102,7 @@ com:
       text: 配置文件中生成的随机数是：
       number: ${random.int(20)} #20以内的随即数
       desc: ${com.shawn.LearningAlways.text} ${com.shawn.LearningAlways.number} #参数间的引用
+
+socket:
+  # socket服务端口
+  port: 7566
