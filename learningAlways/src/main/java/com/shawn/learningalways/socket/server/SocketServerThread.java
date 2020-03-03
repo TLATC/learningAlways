@@ -74,17 +74,18 @@ public class SocketServerThread implements Runnable{
             LOGGER.info("socket服务监听启动，端口为：" + socketConf.getPort());
             socketFlag = true;
 
+			// 创建一个定长(10)线程池，可控制线程最大并发数，超出的线程会在队列中等待
+			fixedThreadPool = new ThreadPoolExecutor(10, 10,
+					0L, TimeUnit.MILLISECONDS,
+					new LinkedBlockingQueue<Runnable>(),
+					new CustomizableThreadFactory("socket-thread-"));
+						
             // 循环，socket长连接
             while(socketFlag){
                 // 阻塞方法，等待接收客户端报文
                 socket = serverSocket.accept();
                 tradeServerDispatcher.setSocket(socket);
 
-                // 创建一个定长(10)线程池，可控制线程最大并发数，超出的线程会在队列中等待
-                fixedThreadPool = new ThreadPoolExecutor(10, 10,
-                        0L, TimeUnit.MILLISECONDS,
-                        new LinkedBlockingQueue<Runnable>(),
-                        new CustomizableThreadFactory("socket-thread-"));
                 // 启多线程处理socket消息
                 fixedThreadPool.execute(tradeServerDispatcher);
             }
