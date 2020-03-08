@@ -10,9 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.Socket;
 import java.util.Map;
 
 /**
@@ -31,23 +28,31 @@ public class TradeServerDispatcher implements Runnable{
     private static final Logger LOGGER = LoggerFactory.getLogger(TradeServerDispatcher.class);
 
     /**
-     * 阿里巴巴threadLocal增强类，可以子啊异步方法中获取socket消息
+     * 阿里巴巴threadLocal增强类，可以在异步方法中获取socket消息
      */
-    private static final ThreadLocal<Socket> localSocket = new TransmittableThreadLocal<>();
+    private static final ThreadLocal<String> localSocketMsg = new TransmittableThreadLocal<>();
 
     /**
      * socket赋值
-     * @param socket socket
+     * @param content socket客户端发来的消息内容
      */
-    public void setSocket(Socket socket){
-        localSocket.set(socket);
+    public void setSocketMsg(String content){
+        localSocketMsg.set(content);
     }
 
     /**
      * 删除本地线程
      */
-    public void removeSocket(){
-        localSocket.remove();
+    public void removeSocketMsg(){
+        localSocketMsg.remove();
+    }
+
+    /**
+     * 获取本地线程
+     * @return
+     */
+    public String getSocketMsg(){
+        return localSocketMsg.get();
     }
 
     /**
@@ -55,57 +60,18 @@ public class TradeServerDispatcher implements Runnable{
      */
     @Override
     public void run() {
-        dispatcherTradeTrade(localSocket.get());
+        dispatcherTradeTrade(getSocketMsg());
     }
 
-
-    /**
-     * @Description 获取socket报文中的正文内容
-     * @param is socket输入流
-     * @return 正文内容
-     * @date 2020/1/17 21:14
-     * @auther Shawn Wu
-     */
-    private String getSocketXmlContent(InputStream is){
-        // 固定前8位是报文体长度
-        byte[] buffer = new byte[8];
-        int len = 0;
-        try {
-            is.read(buffer);
-            int contentLength = Integer.parseInt(new String(buffer, 0, 8));
-            LOGGER.debug("收到的报文长度为：{}", contentLength);
-
-            // 获取报文内容
-            buffer = new byte[contentLength];
-            len = -1;
-            len = is.read(buffer);
-            // -1说明没有输入输出内容，是客户端的连接或断开
-            if(len < 0){
-                return "";
-            }
-        } catch (IOException e) {
-            LOGGER.error("从socket中读取报文内容异常", e);
-        }
-        return new String(buffer, 0, len);
-    }
 
     /**
      * @Description 接收交易报文，并转发给具体的交易
-     * @param socket 交易报文
+     * @param xmlContent 交易报文
      * @return
      * @date 2020/1/16 15:57
      * @auther Shawn Wu
      */
-    public synchronized void dispatcherTradeTrade(Socket socket){
-        InputStream inputStream = null;
-        try {
-            inputStream = socket.getInputStream();
-        } catch (IOException e) {
-            LOGGER.error("从socket中读取输入流异常", e);
-        }
-        // 获取到的报文消息
-        String xmlContent = getSocketXmlContent(inputStream);
-        LOGGER.debug("从socket收到的报文内容是：{}", xmlContent);
+    public void dispatcherTradeTrade(String xmlContent){
         if(StringUtils.isEmpty(xmlContent)){
             return;
         }
@@ -130,6 +96,6 @@ public class TradeServerDispatcher implements Runnable{
         tradeServerStrategy.dealTrade(trade);
 
         // 移除本地线程，防止内存溢出
-        removeSocket();
+        removeSocketMsg();
     }
 }
