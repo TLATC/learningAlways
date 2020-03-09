@@ -40,11 +40,6 @@ public class SocketServerThread implements Runnable{
     @Autowired
     private SocketConf socketConf;
     /**
-     * 交易分发
-     */
-    @Autowired
-    private TradeServerDispatcher tradeServerDispatcher;
-    /**
      * serverSocket
      */
     private ServerSocket serverSocket;
@@ -95,8 +90,9 @@ public class SocketServerThread implements Runnable{
                 }
                 // 获取到的报文消息
                 String xmlContent = getSocketXmlContent(inputStream);
-                LOGGER.debug("从socket收到的报文内容是：{}", xmlContent);
+                LOGGER.debug("收到交易请求，请求报文为：{}", xmlContent);
 
+                TradeServerDispatcher tradeServerDispatcher = new TradeServerDispatcher();
                 tradeServerDispatcher.setSocketMsg(xmlContent);
                 // 启多线程处理socket消息
                 fixedThreadPool.execute(tradeServerDispatcher);

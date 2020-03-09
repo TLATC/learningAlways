@@ -1,25 +1,22 @@
 package com.shawn.learningalways.socket.server.service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.ttl.TransmittableThreadLocal;
 import com.shawn.learningalways.base.util.SpringUtils;
 import com.shawn.learningalways.socket.model.Trade;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 /**
- * @ClassName: TradeServerDispather
+ * @ClassName: TradeServerDispatcher
  * @Description 交易服务端转发层
  * @author: Shawn Wu
  * @date: 2020/1/16 11:06
  * @version:
  */
-@Component
 public class TradeServerDispatcher implements Runnable{
 
     /**
@@ -28,31 +25,16 @@ public class TradeServerDispatcher implements Runnable{
     private static final Logger LOGGER = LoggerFactory.getLogger(TradeServerDispatcher.class);
 
     /**
-     * 阿里巴巴threadLocal增强类，可以在异步方法中获取socket消息
+     * 消息内容
      */
-    private static final ThreadLocal<String> localSocketMsg = new TransmittableThreadLocal<>();
+    private String socketMsg;
 
-    /**
-     * socket赋值
-     * @param content socket客户端发来的消息内容
-     */
-    public void setSocketMsg(String content){
-        localSocketMsg.set(content);
+    public String getSocketMsg() {
+        return socketMsg;
     }
 
-    /**
-     * 删除本地线程
-     */
-    public void removeSocketMsg(){
-        localSocketMsg.remove();
-    }
-
-    /**
-     * 获取本地线程
-     * @return
-     */
-    public String getSocketMsg(){
-        return localSocketMsg.get();
+    public void setSocketMsg(String socketMsg) {
+        this.socketMsg = socketMsg;
     }
 
     /**
@@ -60,7 +42,7 @@ public class TradeServerDispatcher implements Runnable{
      */
     @Override
     public void run() {
-        dispatcherTradeTrade(getSocketMsg());
+        dispatcherTradeTrade(socketMsg);
     }
 
 
@@ -81,7 +63,6 @@ public class TradeServerDispatcher implements Runnable{
         String tradeCode = reqObj.getString("tradeCode");
         // 交易流水号
         String tradeSeqNo = reqObj.getString("tradeSeqNo");
-        LOGGER.debug("收到交易请求，交易码为：{}，流水号为：{}", xmlContent, tradeSeqNo);
 
         // 获取spring上下文
         ApplicationContext applicationContext = SpringUtils.getApplicationContext();
@@ -94,8 +75,5 @@ public class TradeServerDispatcher implements Runnable{
         trade.setTradeCode(tradeCode);
         trade.setTradeSeqNo(tradeSeqNo);
         tradeServerStrategy.dealTrade(trade);
-
-        // 移除本地线程，防止内存溢出
-        removeSocketMsg();
     }
 }
