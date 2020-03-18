@@ -71,11 +71,19 @@ public class SocketServerThread implements Runnable{
             LOGGER.info("socket服务监听启动，端口为：" + socketConf.getPort());
             socketFlag = true;
 
-            // 创建一个定长(10)线程池，可控制线程最大并发数，超出的线程会在队列中等待 todo:考虑线程池工具类
-            fixedThreadPool = TtlExecutors.getTtlExecutorService(new ThreadPoolExecutor(10, 10,
-					0L, TimeUnit.MILLISECONDS,
-					new LinkedBlockingQueue<>(20),
-					new CustomizableThreadFactory("socket-thread-")));
+            // 获取操作系统的cpu核心数
+            int cpuCount = Runtime.getRuntime().availableProcessors();
+            // 此处业务基本是cpu密集的，故核心线程数和最大线程数设置较多
+            int corePoolSize = cpuCount * 2;
+            int maximumPoolSize = cpuCount * 3;
+            // 等待队列的最大长度
+            int capacity = cpuCount * 2;
+            // 线程池名
+            String threadNamePrefix = "socket-thread-";
+            fixedThreadPool = new ThreadPoolExecutor(corePoolSize, maximumPoolSize,
+                    0L, TimeUnit.MILLISECONDS,
+                    new LinkedBlockingQueue<>(capacity),
+                    new CustomizableThreadFactory(threadNamePrefix));
 						
             // 循环，socket长连接
             while(socketFlag){
