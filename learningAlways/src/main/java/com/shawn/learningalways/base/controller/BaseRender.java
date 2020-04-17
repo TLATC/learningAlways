@@ -5,7 +5,7 @@ import com.shawn.learningalways.base.model.JsonResult;
 /**
  * 系统名称: learningAlways
  * 模块名称:
- * 类 名 称: BaseController
+ * 类 名 称: BaseRender
  * 软件版权: shawn
  * 功能说明：基础控制器
  * 系统版本：v1.0.1
@@ -15,7 +15,7 @@ import com.shawn.learningalways.base.model.JsonResult;
  * 相关文档:
  * 修改记录: 修改日期 修改人员 修改说明
  */
-public class BaseController {
+public class BaseRender {
 
     /**
      * 渲染成功数据

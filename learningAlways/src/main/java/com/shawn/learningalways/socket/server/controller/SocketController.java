@@ -1,7 +1,7 @@
 package com.shawn.learningalways.socket.server.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.socket.EchoClient;
 import com.shawn.learningalways.socket.model.SocketConf;
@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(value = "socket")
-public class SocketController extends BaseController {
+public class SocketController extends BaseRender {
 
     /**
      * 日志

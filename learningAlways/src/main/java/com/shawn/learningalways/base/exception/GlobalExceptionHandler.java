@@ -1,14 +1,20 @@
 package com.shawn.learningalways.base.exception;
 
+import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.NestedRuntimeException;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 
 /**
  * 系统名称: learningAlways
@@ -24,7 +30,7 @@ import javax.servlet.http.HttpServletRequest;
  * 修改记录: 修改日期 修改人员 修改说明
  */
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends BaseRender {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
@@ -66,5 +72,63 @@ public class GlobalExceptionHandler {
         result.setMsg(errorMsg);
         return  result;
     }
+
+    /**
+     * 方法参数校验异常处理
+     *
+     * @param e 方法参数校验异常
+     * @return 结果
+     * @date 2020/4/16 14:51
+     * @author Shawn Wu
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseBody
+    public JsonResult handleMethodArgumentNotValidException(MethodArgumentNotValidException e){
+        LOGGER.error("参数校验异常：" + e.getMessage());
+        return renderError(e.getBindingResult().getFieldError().getDefaultMessage());
+    }
+
+    /**
+     * 校验异常处理
+     *
+     * @param e 校验异常
+     * @return 结果
+     * @date 2020/4/16 15:57
+     * @author Shawn Wu
+     */
+    @ExceptionHandler(ValidationException.class)
+    public JsonResult handleValidationException(ValidationException e){
+        LOGGER.error(e.getMessage(), e);
+        return renderError(e.getCause().getMessage());
+    }
+
+    /**
+     * todo: 此处应该有方法描述
+     *
+     * @param e
+     * @return
+     * @date 2020/4/16 16:01
+     * @author Shawn Wu
+     */
+    @ExceptionHandler(ConstraintViolationException.class)
+    public JsonResult handleConstraintViolationException(ConstraintViolationException e){
+        LOGGER.error(e.getMessage(), e);
+        return renderError(e.getMessage());
+    }
+
+    /**
+     * 数据重复异常处理
+     *
+     * @param e 数据重复异常
+     * @return 结果
+     * @date 2020/4/16 16:04
+     * @author Shawn Wu
+     */
+    @ExceptionHandler(DuplicateKeyException.class)
+    public JsonResult handleDuplicateKeyException(DuplicateKeyException e){
+        LOGGER.error(e.getMessage(), e);
+        return renderError("数据重复，请检查后提交");
+    }
+
 
 }

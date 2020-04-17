@@ -1,7 +1,7 @@
 package com.shawn.learningalways.example.controller;
 
 import com.github.pagehelper.PageHelper;
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.base.model.PageBean;
 import com.shawn.learningalways.example.annotation.TestAnnotation;
@@ -33,7 +33,7 @@ import java.util.concurrent.Future;
  */
 @RestController
 @RequestMapping("/example")
-public class ExampleController extends BaseController{
+public class ExampleController extends BaseRender {
 
     /**
      * 要取属性值的对象必须注入到spring中，否则也取不到值

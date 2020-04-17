@@ -1,6 +1,6 @@
 package com.shawn.learningalways.example.controller;
 
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.Captcha;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +21,7 @@ import java.io.OutputStream;
  */
 @Controller
 @RequestMapping("/captcha")
-public class CaptchaController extends BaseController {
+public class CaptchaController extends BaseRender {
 
     /**
      * @Description 返回验证码页面

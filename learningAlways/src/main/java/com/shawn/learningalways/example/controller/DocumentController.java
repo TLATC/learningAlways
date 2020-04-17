@@ -1,14 +1,12 @@
 package com.shawn.learningalways.example.controller;
 
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.example.model.Example;
 import com.shawn.learningalways.example.service.impl.ExampleServiceImpl;
 import org.apache.poi.hssf.usermodel.*;
-import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,7 +28,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/document")
-public class DocumentController extends BaseController {
+public class DocumentController extends BaseRender {
 
     @Autowired
     ExampleServiceImpl exampleServiceImpl;

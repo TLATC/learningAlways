@@ -1,6 +1,6 @@
 package com.shawn.learningalways.example.controller;
 
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * 修改记录: 修改日期 修改人员 修改说明
  */
 @Controller
-public class ThymeleafController extends BaseController {
+public class ThymeleafController extends BaseRender {
 
     /**
      * @Description 返回index.html

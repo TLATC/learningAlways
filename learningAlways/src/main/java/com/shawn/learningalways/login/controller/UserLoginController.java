@@ -1,6 +1,6 @@
 package com.shawn.learningalways.login.controller;
 
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.exception.CommonException;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.login.model.LoginContext;
@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/userLogin")
-public class UserLoginController extends BaseController{
+public class UserLoginController extends BaseRender {
 
     @Autowired
     RedisTicketRepository redisTicketRepository;

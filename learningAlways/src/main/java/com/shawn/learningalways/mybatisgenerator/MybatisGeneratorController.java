@@ -1,6 +1,6 @@
 package com.shawn.learningalways.mybatisgenerator;
 
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.mybatisgenerator.model.MybatisGeneratorDO;
 import com.shawn.learningalways.mybatisgenerator.service.MybatisGeneratorService;
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("myGenerator")
-public class MybatisGeneratorController extends BaseController{
+public class MybatisGeneratorController extends BaseRender {
 
     @Autowired
     MybatisGeneratorService mybatisGeneratorService;

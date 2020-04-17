@@ -1,6 +1,6 @@
 package com.shawn.learningalways.hrm.controller;
 
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.hrm.model.User;
 import com.shawn.learningalways.hrm.service.UserService;
@@ -27,7 +27,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/user")
-public class UserController extends BaseController{
+public class UserController extends BaseRender {
 
     @Autowired
     private UserService userService;

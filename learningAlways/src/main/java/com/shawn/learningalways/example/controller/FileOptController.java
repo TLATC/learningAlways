@@ -1,6 +1,6 @@
 package com.shawn.learningalways.example.controller;
 
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,7 +26,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/fileOpt")
-public class FileOptController extends BaseController{
+public class FileOptController extends BaseRender {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(FileOptController.class);
 

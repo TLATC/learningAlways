@@ -1,6 +1,6 @@
 package com.shawn.learningalways.ranklist.controller;
 
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.ranklist.model.UserRank;
 import com.shawn.learningalways.ranklist.service.UserRankService;
@@ -18,7 +18,7 @@ import java.util.Set;
  */
 @RestController
 @RequestMapping("/userRank")
-public class UserRankController extends BaseController {
+public class UserRankController extends BaseRender {
 
     @Autowired
     UserRankService userRankService;

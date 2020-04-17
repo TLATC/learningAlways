@@ -1,6 +1,6 @@
 package com.shawn.learningalways.logintest.controller;
 
-import com.shawn.learningalways.base.controller.BaseController;
+import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.login.LoginContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(value = "/staff")
-public class StaffController extends BaseController{
+public class StaffController extends BaseRender {
 
     @PostMapping("/doSomeThing")
     public JsonResult doSomeThing(){
