@@ -10,7 +10,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
@@ -34,44 +33,53 @@ public class GlobalExceptionHandler extends BaseRender {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+
     /**
-     * 统一异常处理
-     * @param req
-     * @param e
-     * @return
+     * Exception处理
+     *
+     * @param e Exception
+     * @return 异常结果
+     * @date 2020/5/8 14:35
+     * @author Shawn Wu
      */
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(Exception.class)
     @ResponseBody
-    public JsonResult commonExceptionHandler(HttpServletRequest req, Exception e){
-
-        // 此处要加后台日志打印。否则拦截后，后台日志不会打印
-        LOGGER.error("处理普通请求异常时响应到客户端异常",e);
-
-        String errorMsg = e.getMessage();
-        if(e instanceof CommonException){
-            errorMsg = errorMsg;
-        } else if(e instanceof ClassNotFoundException){
-            errorMsg = "未找到需要的类";
-        } else if (e instanceof ArrayIndexOutOfBoundsException) {
-            errorMsg = "数组下标越界异常";
-        } else if (e instanceof ClassCastException) {
-            errorMsg = "类型强制转换异常";
-        } else if (e instanceof NullPointerException) {
-            errorMsg = "空指针异常";
-        } else if (e instanceof NumberFormatException) {
-            errorMsg = "字符串格式转换异常";
-        } else if (e instanceof NestedRuntimeException) {
-            errorMsg = "数据库执行异常";
-        }else {
-            errorMsg = "请求异常,请联系管理员";
-        }
-
-        JsonResult result = new JsonResult();
-        result.setSuccess(false);
-        result.setStatus("500");
-        result.setMsg(errorMsg);
-        return  result;
+    public JsonResult handleException(Exception e, HttpServletRequest request){
+        LOGGER.error("处理普通请求异常时响应到客户端异常，请求接口为{}", request.getRequestURI(), e);
+        return renderError("请求异常，请联系管理员");
     }
+
+    /**
+     * 本项目的自定义异常CommonException处理
+     *
+     * @param e CommonException
+     * @return 异常结果
+     * @date 2020/5/8 14:36
+     * @author Shawn Wu
+     */
+    @ExceptionHandler(CommonException.class)
+    @ResponseBody
+    public JsonResult handleCommonException(CommonException e, HttpServletRequest request){
+        LOGGER.error("处理普通请求异常时响应到客户端异常，请求接口为{}", request.getRequestURI(), e);
+        return renderError(e.getMessage());
+    }
+
+    /**
+     * NestedRuntimeException异常处理
+     *
+     * @param e NestedRuntimeException
+     * @return 异常结果
+     * @date 2020/5/8 14:37
+     * @author Shawn Wu
+     */
+    @ExceptionHandler(NestedRuntimeException.class)
+    @ResponseBody
+    public JsonResult handleNullPointerException(NestedRuntimeException e, HttpServletRequest request){
+        LOGGER.error("数据库执行异常，请求接口为{}", request.getRequestURI(), e);
+        return renderError("数据库执行异常");
+    }
+
+
 
     /**
      * 方法参数校验异常处理
@@ -103,10 +111,10 @@ public class GlobalExceptionHandler extends BaseRender {
     }
 
     /**
-     * todo: 此处应该有方法描述
+     * 校验异常
      *
-     * @param e
-     * @return
+     * @param e 校验异常
+     * @return 结果
      * @date 2020/4/16 16:01
      * @author Shawn Wu
      */

@@ -2,6 +2,7 @@ package com.shawn.learningalways.example.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.shawn.learningalways.base.controller.BaseRender;
+import com.shawn.learningalways.base.exception.CommonException;
 import com.shawn.learningalways.base.model.JsonResult;
 import com.shawn.learningalways.base.model.PageBean;
 import com.shawn.learningalways.example.annotation.TestAnnotation;
@@ -82,12 +83,19 @@ public class ExampleController extends BaseRender {
     }
 
     @RequestMapping("/exceptionTest")
-    public String exceptionTest(){
-        int[] a = new int[10];
-        int qqq = a[12];
-        System.out.println("这里越界了" + qqq);
-        return "sdfa";
-//        throw new CommonException("抛出一个异常");
+    public JsonResult exceptionTest(int flag){
+        switch (flag){
+            case 0:
+                throw new NullPointerException();
+            case 1:
+                throw new ArrayIndexOutOfBoundsException();
+            case 2:
+                throw new ClassCastException();
+            case 3:
+                throw new NumberFormatException();
+            default:
+                throw new CommonException("测试CommonException");
+        }
     }
 
     @RequestMapping("/renderTest")
