@@ -1,7 +1,6 @@
 package com.shawn.learningalways.example.service;
 
 import com.shawn.learningalways.example.model.ValidateUserDTO;
-import org.springframework.validation.annotation.Validated;
 
 /**
  * ValidateService
