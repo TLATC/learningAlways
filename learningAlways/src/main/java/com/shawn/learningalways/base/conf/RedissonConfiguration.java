@@ -4,7 +4,7 @@ import org.apache.commons.lang.StringUtils;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
-import com.shawn.learningalways.base.conf.model.RedisProperties;
+import com.shawn.learningalways.base.conf.model.RedisYmlProperties;
 import org.redisson.config.SingleServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +24,7 @@ public class RedissonConfiguration {
      * redis配置
      */
     @Autowired
-    private RedisProperties redisProperties;
+    private RedisYmlProperties redisYmlProperties;
 
 
     /**
@@ -38,14 +38,14 @@ public class RedissonConfiguration {
     public RedissonClient redissonSingle(){
         Config config = new Config();
         // 配置redis地址
-        String redisAddress = "redis://" + redisProperties.getHost()
-                + ":" +redisProperties.getPort();
+        String redisAddress = "redis://" + redisYmlProperties.getHost()
+                + ":" + redisYmlProperties.getPort();
         SingleServerConfig serverConfig = config.useSingleServer()
                 .setAddress(redisAddress);
 //        .setAddress(redis://10.18.75.115:6379)
         // 配置redis密码
-        if(StringUtils.isNotBlank(redisProperties.getPassword())) {
-            serverConfig.setPassword(redisProperties.getPassword());
+        if(StringUtils.isNotBlank(redisYmlProperties.getPassword())) {
+            serverConfig.setPassword(redisYmlProperties.getPassword());
         }
 
         return Redisson.create(config);
