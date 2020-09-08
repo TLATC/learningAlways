@@ -63,7 +63,7 @@
     <!--druid连接池版本号-->
     <druid.version>1.0.27</druid.version>
     <!--mysql版本号-->
-    <mysql-connector-java.version>5.1.40</mysql-connector-java.version>
+    <mysql-connector-java.version>8.0.16</mysql-connector-java.version>
     <!--fastJson版本号-->
     <fastjson.version>1.2.28</fastjson.version>
     <!--mybatis-plus版本号-->
