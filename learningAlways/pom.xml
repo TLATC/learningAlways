@@ -184,6 +184,12 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- 引入netty -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

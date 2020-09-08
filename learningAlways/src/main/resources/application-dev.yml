@@ -106,3 +106,9 @@ com:
 socket:
   # socket服务端口
   port: 7566
+
+netty:
+  # 服务端的端口
+  serverPort: 7666
+  # 客户端的端口
+  clientPort: 7766
