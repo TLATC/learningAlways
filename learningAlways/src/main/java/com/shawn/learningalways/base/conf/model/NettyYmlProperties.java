@@ -18,13 +18,26 @@ public class NettyYmlProperties {
      * netty服务端的端口
      */
     @Value("${netty.serverPort}")
-    private String serverPort;
+    private Integer serverPort;
+    /**
+     * 消息编码格式
+     */
+    @Value("${netty.encoding}")
+    private String encoding;
 
-    public String getServerPort() {
+    public Integer getServerPort() {
         return serverPort;
     }
 
-    public void setServerPort(String serverPort) {
+    public void setServerPort(Integer serverPort) {
         this.serverPort = serverPort;
+    }
+
+    public String getEncoding() {
+        return encoding;
+    }
+
+    public void setEncoding(String encoding) {
+        this.encoding = encoding;
     }
 }

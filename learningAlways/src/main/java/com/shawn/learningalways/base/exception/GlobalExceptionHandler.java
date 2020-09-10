@@ -16,17 +16,12 @@ import javax.validation.ConstraintViolationException;
 import javax.validation.ValidationException;
 
 /**
- * 系统名称: learningAlways
- * 模块名称:
- * 类 名 称: GlobalExceptionHandler
- * 软件版权: shawn
- * 功能说明：全局异常处理类
- * 系统版本：v1.0.1
- * 开发人员: shawn
- * 开发时间: 2018/7/1 16:37
- * 审核人员:
- * 相关文档:
- * 修改记录: 修改日期 修改人员 修改说明
+ * GlobalExceptionHandler
+ * 全局异常处理类
+ *
+ * @author Shawn Wu
+ * @date 2018/7/1 16:37
+ * @since x
  */
 @ControllerAdvice
 public class GlobalExceptionHandler extends BaseRender {
@@ -46,7 +41,7 @@ public class GlobalExceptionHandler extends BaseRender {
     @ResponseBody
     public JsonResult handleException(Exception e, HttpServletRequest request){
         LOGGER.error("处理普通请求异常时响应到客户端异常，请求接口为{}", request.getRequestURI(), e);
-        return renderError("请求异常，请联系管理员");
+        return renderError(e.getMessage());
     }
 
     /**
@@ -137,6 +132,5 @@ public class GlobalExceptionHandler extends BaseRender {
         LOGGER.error(e.getMessage(), e);
         return renderError("数据重复，请检查后提交");
     }
-
 
 }

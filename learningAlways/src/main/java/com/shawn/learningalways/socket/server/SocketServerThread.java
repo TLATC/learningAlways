@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * @ClassName: SocketServerThread
  * @Description socket服务端线程
+ *              使用netty更好，见netty目录
  * @author: Shawn Wu
  * @date: 2020/1/16 16:13
  * @version:
