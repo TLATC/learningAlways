@@ -1,5 +1,8 @@
 package com.shawn.learningalways.netty;
 
+import com.shawn.learningalways.base.conf.model.NettyYmlProperties;
+import com.shawn.learningalways.socket.server.service.impl.GetAgentChatInfoStrategy;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;
@@ -22,15 +25,18 @@ public class TradeServerInitializer extends ChannelInitializer<SocketChannel>{
     /**
      * netty交易服务事件处理类
      */
-    private final TradeServerHandler tradeServerHandler;
+    private final NettyYmlProperties nettyYmlProperties;
+
+    private final GetAgentChatInfoStrategy getAgentChatInfoStrategy;
 
     /**
      * 构造方法注入
      * @param tradeServerHandler netty交易服务事件处理类
      */
     @Autowired
-    public TradeServerInitializer(TradeServerHandler tradeServerHandler) {
-        this.tradeServerHandler = tradeServerHandler;
+    public TradeServerInitializer(NettyYmlProperties nettyYmlProperties, GetAgentChatInfoStrategy getAgentChatInfoStrategy) {
+        this.nettyYmlProperties = nettyYmlProperties;
+        this.getAgentChatInfoStrategy = getAgentChatInfoStrategy;
     }
 
     /**
@@ -43,7 +49,7 @@ public class TradeServerInitializer extends ChannelInitializer<SocketChannel>{
     @Override
     protected void initChannel(SocketChannel socketChannel) throws Exception {
         ChannelPipeline pipeline = socketChannel.pipeline();
-        // 设置交易的业务处理类
-        pipeline.addLast(tradeServerHandler);
+        // 设置交易的业务处理类（注意，此处必须new新实例）
+        pipeline.addLast(new TradeServerHandler(nettyYmlProperties, getAgentChatInfoStrategy));
     }
 }

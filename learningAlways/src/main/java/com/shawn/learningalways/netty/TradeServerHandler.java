@@ -1,6 +1,8 @@
 package com.shawn.learningalways.netty;
 
 import com.shawn.learningalways.base.conf.model.NettyYmlProperties;
+import com.shawn.learningalways.socket.model.Trade;
+import com.shawn.learningalways.socket.server.service.impl.GetAgentChatInfoStrategy;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
@@ -19,24 +21,20 @@ import java.nio.charset.Charset;
  * @date 2020/9/10 13:40
  * @since x
  */
-@Component
 public class TradeServerHandler extends ChannelInboundHandlerAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(TradeServerHandler.class);
 
     /**
-     * netty配置文件类
+     * netty交易服务事件处理类
      */
-    private final NettyYmlProperties nettyYmlProperties;
+    private NettyYmlProperties nettyYmlProperties;
 
-    /**
-     * 构造方法注入
-     * @param nettyYmlProperties netty配置文件类
-     */
-    @Autowired
-    public TradeServerHandler(NettyYmlProperties nettyYmlProperties) {
+    private GetAgentChatInfoStrategy getAgentChatInfoStrategy;
+
+    public TradeServerHandler(NettyYmlProperties nettyYmlProperties, GetAgentChatInfoStrategy getAgentChatInfoStrategy) {
         this.nettyYmlProperties = nettyYmlProperties;
+        this.getAgentChatInfoStrategy = getAgentChatInfoStrategy;
     }
-
 
     /**
      * 接收上下文传来的消息
@@ -53,6 +51,7 @@ public class TradeServerHandler extends ChannelInboundHandlerAdapter {
         LOGGER.debug("收到了来自客户端的消息，内容为： {}", reqString);
 
         // todo: 此处可以增加处理消息的业务逻辑
+        getAgentChatInfoStrategy.dealTrade(new Trade());
     }
 
     /**
