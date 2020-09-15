@@ -132,7 +132,10 @@ public class TradeServer implements SmartLifecycle{
      * @author Shawn Wu
      */
     private void startServer(){
-        // NioEventLoopGroup是用来处理IO操作的多线程事件循环器 todo:为啥是1
+        /*
+         * bossGroup是用来处理TCP连接请求的，其中有多个NioEventLoop线程，每个NioEventLoop绑定一个端口
+         * 本示例中只需要监听一个端口，所以只要有一个NioEventLoop线程就行了
+         */
         boss = new NioEventLoopGroup(1);
         worker = new NioEventLoopGroup();
 

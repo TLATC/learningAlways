@@ -1,17 +1,20 @@
 package com.shawn.learningalways.netty;
 
+import com.alibaba.fastjson.JSONObject;
 import com.shawn.learningalways.base.conf.model.NettyYmlProperties;
-import com.shawn.learningalways.socket.model.Trade;
-import com.shawn.learningalways.socket.server.service.impl.GetAgentChatInfoStrategy;
+import com.shawn.learningalways.base.util.SpringUtils;
+import com.shawn.learningalways.netty.model.Trade;
+import com.shawn.learningalways.netty.service.TradeServerStrategy;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.context.ApplicationContext;
+import reactor.core.support.Assert;
 
 import java.nio.charset.Charset;
+import java.util.Map;
 
 /**
  * TradeServerHandler
@@ -29,12 +32,10 @@ public class TradeServerHandler extends ChannelInboundHandlerAdapter {
      */
     private NettyYmlProperties nettyYmlProperties;
 
-    private GetAgentChatInfoStrategy getAgentChatInfoStrategy;
-
-    public TradeServerHandler(NettyYmlProperties nettyYmlProperties, GetAgentChatInfoStrategy getAgentChatInfoStrategy) {
+    TradeServerHandler(NettyYmlProperties nettyYmlProperties) {
         this.nettyYmlProperties = nettyYmlProperties;
-        this.getAgentChatInfoStrategy = getAgentChatInfoStrategy;
     }
+
 
     /**
      * 接收上下文传来的消息
@@ -50,8 +51,26 @@ public class TradeServerHandler extends ChannelInboundHandlerAdapter {
         String reqString = buffer.toString(Charset.forName(nettyYmlProperties.getEncoding()));
         LOGGER.debug("收到了来自客户端的消息，内容为： {}", reqString);
 
-        // todo: 此处可以增加处理消息的业务逻辑
-        getAgentChatInfoStrategy.dealTrade(new Trade());
+        // 固定报文前8位标识长度
+        reqString = reqString.substring(8, reqString.length());
+        JSONObject reqObj = JSONObject.parseObject(reqString);
+        // 交易码
+        String tradeCode = reqObj.getString("tradeCode");
+        // 交易流水号
+        String tradeSeqNo = reqObj.getString("tradeSeqNo");
+
+        // 获取spring上下文
+        ApplicationContext applicationContext = SpringUtils.getApplicationContext();
+        // 获取TradeServerStrategy的所有实现类
+        Map<String, TradeServerStrategy> result = applicationContext.getBeansOfType(TradeServerStrategy.class);
+        // 根据交易码，获取具体的实现类
+        TradeServerStrategy tradeServerStrategy = result.get(tradeCode);
+        Assert.notNull(tradeServerStrategy, "根据交易码"+tradeCode+"，未找到具体实现类。请检查交易码是否正确");
+        // 执行交易的业务代码
+        Trade trade = new Trade();
+        trade.setTradeCode(tradeCode);
+        trade.setTradeSeqNo(tradeSeqNo);
+        tradeServerStrategy.dealTrade(trade);
     }
 
     /**
