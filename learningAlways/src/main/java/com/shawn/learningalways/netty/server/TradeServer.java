@@ -1,4 +1,4 @@
-package com.shawn.learningalways.netty;
+package com.shawn.learningalways.netty.server;
 
 import com.shawn.learningalways.base.conf.model.NettyYmlProperties;
 import io.netty.bootstrap.ServerBootstrap;
@@ -139,11 +139,11 @@ public class TradeServer implements SmartLifecycle{
         boss = new NioEventLoopGroup(1);
         worker = new NioEventLoopGroup();
 
-        // ServerBootstrap是一个启动NIO服务的辅助启动类
+        // ServerBootstrap是一个引导服务端启动NIO服务的辅助启动类
         ServerBootstrap serverBootstrap = new ServerBootstrap();
         serverBootstrap.group(boss, worker)
                 .channel(NioServerSocketChannel.class)
-                // 用来处理客户端的请求
+                // 用来处理请求
                 .childHandler(tradeServerInitializer)
                 .option(ChannelOption.SO_BACKLOG, 1024);
 
@@ -151,7 +151,7 @@ public class TradeServer implements SmartLifecycle{
         try {
             cf = serverBootstrap.bind(nettyYmlProperties.getServerPort()).sync();
         } catch (InterruptedException e) {
-            LOGGER.error("netty服务端绑定端口异常", e);
+            LOGGER.error("netty服务端启动异常", e);
         }
 
         LOGGER.info("netty服务端启动成功，端口为：{}", nettyYmlProperties.getServerPort());

@@ -108,7 +108,11 @@ socket:
   port: 7566
 
 netty:
+  # 服务端的ip
+  serverIp: 127.0.0.1
   # 服务端的端口
   serverPort: 7666
+  # 客户端的端口
+  clientPort: 7665
   # 消息编码格式
-  encoding: GBK
+  encoding: UTF-8

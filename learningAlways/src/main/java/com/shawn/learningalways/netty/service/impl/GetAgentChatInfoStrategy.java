@@ -1,6 +1,7 @@
 package com.shawn.learningalways.netty.service.impl;
 
 
+import com.alibaba.fastjson.JSONObject;
 import com.shawn.learningalways.netty.service.TradeServerStrategy;
 import com.shawn.learningalways.netty.model.Trade;
 import org.slf4j.Logger;
@@ -27,7 +28,11 @@ public class GetAgentChatInfoStrategy implements TradeServerStrategy {
      * @author Shawn Wu
      */
     @Override
-    public void dealTrade(Trade trade) {
+    public String dealTrade(Trade trade) {
         LOGGER.debug("此处是netty服务端，到达了交易20001");
+        JSONObject result = new JSONObject();
+        result.put("status", 200);
+        result.put("msg", "交易20001处理完毕，这里是返回");
+        return result.toJSONString();
     }
 }

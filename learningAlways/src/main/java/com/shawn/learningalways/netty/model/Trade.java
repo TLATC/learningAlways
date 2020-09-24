@@ -3,6 +3,7 @@ package com.shawn.learningalways.netty.model;
 /**
  * Trade
  * 交易实体类
+ * 与约定好的报文格式对应
  *
  * @author Shawn Wu
  * @date 2020/1/16 10:56

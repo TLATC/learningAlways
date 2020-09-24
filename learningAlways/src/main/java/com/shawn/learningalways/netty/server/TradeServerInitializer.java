@@ -1,4 +1,4 @@
-package com.shawn.learningalways.netty;
+package com.shawn.learningalways.netty.server;
 
 import com.shawn.learningalways.base.conf.model.NettyYmlProperties;
 import io.netty.channel.ChannelInitializer;

@@ -4,12 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.shawn.learningalways.base.conf.model.NettyYmlProperties;
 import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.JsonResult;
+import com.shawn.learningalways.netty.client.TradeClient;
 import com.shawn.learningalways.socket.EchoClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.*;
 import java.util.Random;
 import java.util.UUID;
 
@@ -31,7 +33,37 @@ public class NettyController extends BaseRender{
      */
     @Autowired
     private NettyYmlProperties nettyYmlProperties;
+    @Autowired
+    private TradeClient tradeClient;
 
+
+    /**
+     * 构造模拟的交易请求报文
+     *
+     * @return 模拟的交易请求报文
+     * @date 2020/9/24 13:11
+     * @author Shawn Wu
+     */
+    private String generateMockTradeMsg(){
+        // 报文体长度
+        String length = "00001000";
+        // 交易码
+        Random random = new Random();
+        random.nextInt(2);
+        String tradeCode = random.nextInt(2)==0?"20001":"20002"; // todo:交易码错误时，不应该让接口卡住
+        // 交易流水号
+        String tradeSeqNo = UUID.randomUUID().toString().replaceAll("-", "");
+        // 模拟的交易字段内容
+        String tradeContent = "it's a mock trade message";
+        /*
+         * 构造请求报文
+         */
+        JSONObject reqObj = new JSONObject();
+        reqObj.put("tradeCode", tradeCode);
+        reqObj.put("tradeSeqNo", tradeSeqNo);
+        reqObj.put("tradeContent", tradeContent);
+        return length + reqObj.toJSONString();
+    }
 
     /**
      * 启动传统的socket客户端
@@ -45,22 +77,8 @@ public class NettyController extends BaseRender{
         // 开启socket客户端
         EchoClient client = new EchoClient();
         client.startConnection(serverIp, serverPort);
-
-        // 报文体长度
-        String length = "00001000";
-        // 交易码
-        Random random = new Random();
-        random.nextInt(2);
-        String tradeCode = random.nextInt(2)==0?"20001":"20002";
-        // 交易流水号
-        String tradeSeqNo = UUID.randomUUID().toString().replaceAll("-", "");
-        /*
-         * 构造请求报文
-         */
-        JSONObject reqObj = new JSONObject();
-        reqObj.put("tradeCode", tradeCode);
-        reqObj.put("tradeSeqNo", tradeSeqNo);
-        String reqMsg = length + reqObj.toJSONString();
+        // 构造请求报文
+        String reqMsg = generateMockTradeMsg();
         // 发送报文请求
         String tradeResult = client.sendMessage(reqMsg);
         LOGGER.debug("收到服务端的返回是：{}", tradeResult);
@@ -76,7 +94,7 @@ public class NettyController extends BaseRender{
      * @date 2020/9/10 16:37
      * @author Shawn Wu
      */
-    @GetMapping(value = "singleSocketClientStart")
+    @GetMapping("/singleSocketClientStart")
     public JsonResult singleSocketClientStart() {
         Runnable task = () -> socketClientStart("127.0.0.1", nettyYmlProperties.getServerPort());
         Thread thread = new Thread(task);
@@ -93,7 +111,7 @@ public class NettyController extends BaseRender{
      * @date 2020/9/10 17:08
      * @author Shawn Wu
      */
-    @PostMapping(value = "batchSocketClientStart")
+    @PostMapping("batchSocketClientStart")
     public JsonResult batchSocketClientStart(@RequestBody String jsonString){
         JSONObject reqObj = JSONObject.parseObject(jsonString);
         int num = reqObj.getInteger("num");
@@ -106,4 +124,27 @@ public class NettyController extends BaseRender{
         }
         return renderSuccess();
     }
+
+
+    /**
+     * 启动单个netty客户端
+     *
+     * @return 结果
+     * @date 2020/9/24 15:30
+     * @author Shawn Wu
+     */
+    @PostMapping("singleNettyClientStart")
+    public JsonResult singleNettyClientStart(){
+        // 构造请求报文
+        String reqMsg = generateMockTradeMsg();
+        try {
+            tradeClient.startClient(nettyYmlProperties.getServerIp(), nettyYmlProperties.getServerPort(), reqMsg);
+        } catch (Exception e) {
+            LOGGER.error("启动netty客户端时发生异常", e);
+            return renderError("启动netty客户端时发生异常");
+        }
+        return renderSuccess();
+    }
+
+    // todo:批量测试
 }
