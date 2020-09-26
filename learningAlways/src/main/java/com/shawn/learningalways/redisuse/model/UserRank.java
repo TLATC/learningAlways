@@ -1,4 +1,4 @@
-package com.shawn.learningalways.ranklist.model;
+package com.shawn.learningalways.redisuse.model;
 
 import java.io.Serializable;
 

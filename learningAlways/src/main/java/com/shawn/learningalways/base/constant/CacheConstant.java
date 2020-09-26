@@ -10,8 +10,16 @@ package com.shawn.learningalways.base.constant;
 public class CacheConstant {
 
     /**
+     * 本工程redis的key统一前缀
+     */
+    public static final String KEY_PREFIX = "learningAlways:";
+
+    /**
      * 用户排行榜的key值
      */
-    public static final String USER_SCORE_RANK = "userScoreRank";
-
+    public static final String USER_SCORE_RANK = KEY_PREFIX + "userScoreRank";
+    /**
+     * 用户签入的key前缀
+     */
+    public static final String USER_SIGN_IN_PREFIX = KEY_PREFIX + "userSignIn:";
 }

@@ -1,8 +1,8 @@
-package com.shawn.learningalways.ranklist.service.impl;
+package com.shawn.learningalways.redisuse.service.impl;
 
 import com.shawn.learningalways.base.constant.CacheConstant;
-import com.shawn.learningalways.ranklist.model.UserRank;
-import com.shawn.learningalways.ranklist.service.UserRankService;
+import com.shawn.learningalways.redisuse.model.UserRank;
+import com.shawn.learningalways.redisuse.service.UserRankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

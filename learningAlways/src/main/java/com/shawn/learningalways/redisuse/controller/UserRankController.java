@@ -1,9 +1,9 @@
-package com.shawn.learningalways.ranklist.controller;
+package com.shawn.learningalways.redisuse.controller;
 
 import com.shawn.learningalways.base.controller.BaseRender;
 import com.shawn.learningalways.base.model.JsonResult;
-import com.shawn.learningalways.ranklist.model.UserRank;
-import com.shawn.learningalways.ranklist.service.UserRankService;
+import com.shawn.learningalways.redisuse.model.UserRank;
+import com.shawn.learningalways.redisuse.service.UserRankService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +12,7 @@ import java.util.Set;
 /**
  * @ClassName: UserRankController
  * @Description 用户排行榜控制层
+ *              使用zset实现
  * @author: Shawn Wu
  * @date: 2019/11/26 16:37
  * @version:

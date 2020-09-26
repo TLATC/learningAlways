@@ -1,6 +1,6 @@
-package com.shawn.learningalways.ranklist.service;
+package com.shawn.learningalways.redisuse.service;
 
-import com.shawn.learningalways.ranklist.model.UserRank;
+import com.shawn.learningalways.redisuse.model.UserRank;
 
 import java.util.Set;
 
