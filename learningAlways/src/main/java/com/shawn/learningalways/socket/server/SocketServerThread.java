@@ -1,6 +1,5 @@
 package com.shawn.learningalways.socket.server;
 
-import com.alibaba.ttl.threadpool.TtlExecutors;
 import com.shawn.learningalways.socket.model.SocketConf;
 import com.shawn.learningalways.socket.server.service.TradeServerDispatcher;
 import org.slf4j.Logger;

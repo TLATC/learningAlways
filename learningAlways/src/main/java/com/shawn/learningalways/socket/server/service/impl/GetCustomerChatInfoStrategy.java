@@ -32,4 +32,5 @@ public class GetCustomerChatInfoStrategy implements TradeServerStrategy {
     public void dealTrade(Trade trade) {
         LOGGER.debug("到达了交易10002");
     }
+
 }
